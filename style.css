@@ -35,6 +35,15 @@ body {
 }
 
 
+.shopping-cart::after {
+    content: "0";
+    background: white;
+    border-radius: 50%;
+    font-size: 1rem;
+    position: relative;
+    bottom: 1rem;
+}
+
 .material-symbols-outlined {
     font-variation-settings:
         'FILL' 0,
