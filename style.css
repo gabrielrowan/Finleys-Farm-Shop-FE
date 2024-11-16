@@ -60,10 +60,9 @@ body {
     height: 25px;
     background-color: black;
     color: white;
-    align-items: center;
-    display: flex;
+    text-align: center;
+    line-height: 25px;
     border-radius: 50px;
-    justify-content: center;
     right: -50%;
     bottom: 70%;
 }
