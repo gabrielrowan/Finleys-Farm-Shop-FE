@@ -22,7 +22,8 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: .75rem;
+    padding: 1.2rem 2rem;
+
 }
 
 
@@ -43,6 +44,30 @@ body {
     position: relative;
     bottom: 1rem;
 }
+
+.cart-icon {
+    width: 60px;
+}
+
+.cart-icon-container {
+    position: relative;
+}
+
+.cart-count {
+    font-size: 1rem;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: black;
+    color: white;
+    align-items: center;
+    display: flex;
+    border-radius: 50px;
+    justify-content: center;
+    right: -50%;
+    bottom: 70%;
+}
+
 
 .material-symbols-outlined {
     font-variation-settings:
