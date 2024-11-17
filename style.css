@@ -70,7 +70,6 @@ body {
 
 .add-to-cart {
     width: 100%;
-    padding: 0.6rem 0;
     font-size: 1rem;
     background: #a2af9f;
     border: none;
@@ -166,21 +165,17 @@ body {
     border-radius: 0 0 1.25rem 1.25rem;
     background: #f6edd9;
     align-self: end;
-    padding: 0.5rem;
+    padding: 0.75rem;
+}
+
+.shop-item-title {
+    margin-bottom: 0.5rem;
 }
 
 .shop-item-price {
     font-size: 1rem;
-    margin: 0.5rem;
 }
 
-.shop-item-title {
-    margin: 0.5rem;
-}
-
-.shop-item-title {
-    margin: 0.5rem;
-}
 
 .shop-item-img {
     width: 100%;
