@@ -68,6 +68,15 @@ body {
     font-size: 1.2rem;
 }
 
+.add-to-cart {
+    width: 100%;
+    padding: 0.6rem 0;
+    font-size: 1rem;
+    background: #a2af9f;
+    border: none;
+    margin: 0.5rem 0;
+}
+
 
 .material-symbols-outlined {
     font-variation-settings:
