@@ -35,15 +35,11 @@ body {
     margin: 0 1rem;
 }
 
-
-.shopping-cart::after {
-    content: "0";
-    background: white;
-    border-radius: 50%;
-    font-size: 1rem;
-    position: relative;
-    bottom: 1rem;
+.cart-container {
+    display: flex;
+    align-items: center;
 }
+
 
 .cart-icon {
     width: 60px;
@@ -65,6 +61,11 @@ body {
     border-radius: 50px;
     right: -50%;
     bottom: 70%;
+}
+
+.cart-total {
+    margin-left: 1.5rem;
+    font-size: 1.2rem;
 }
 
 
