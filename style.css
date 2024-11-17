@@ -74,7 +74,30 @@ body {
     font-size: 1rem;
     background: #a2af9f;
     border: none;
-    margin: 0.5rem 0;
+    margin: 1rem 0;
+    height: 2.4rem;
+}
+
+.cart-items-control {
+    width: 100%;
+    display: flex;
+    margin: 1rem 0;
+}
+
+
+.button-cart-quantity {
+    background-color: #a2af9f;
+    border: none;
+    font-size: 1.5rem;
+    width: 25%;
+    height: 2.4rem
+}
+
+.input-cart-quantity {
+    text-align: center;
+    border: none;
+    font-size: 1rem;
+    width: 50%;
 }
 
 
