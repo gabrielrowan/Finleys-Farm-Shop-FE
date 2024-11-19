@@ -176,6 +176,17 @@ body {
     font-size: 1rem;
 }
 
+/* removes up and down arrows in input box for Chrome, Safari and Edge*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* removes up and down arrows in input box for Firefox*/
+input[type=number] {
+    -moz-appearance: textfield;
+}
 
 .shop-item-img {
     width: 100%;
