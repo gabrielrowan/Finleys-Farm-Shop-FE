@@ -25,8 +25,34 @@ const addButtonClicked = (event) =>
     const buttonParent = event.target.parentElement;
     const addButton = buttonParent.getElementsByClassName("add-to-cart")[0];
     addButton.remove();
+    addCartItemInput(buttonParent);
 }
 
+const addCartItemInput = (parentElement) =>
+{
+    const increaseQuantityButton = document.createElement('button');
+    increaseQuantityButton.className = "button-cart-quantity";
+    const decreaseQuantityButton = document.createElement('button');
+    decreaseQuantityButton.className = "button-cart-quantity";
+    increaseQuantityButton.innerText = "+";
+    decreaseQuantityButton.innerText = "-";
+    const quantityInput = document.createElement('input');
+    const quantityInputDiv = document.createElement('div');
+    quantityInputDiv.className = 'cart-items-control';
+    quantityInput.value = 1;
+    quantityInput.type = "number";
+    quantityInput.step = 1;
+    quantityInput.min = 0;
+    quantityInput.className = "input-cart-quantity";
+    quantityInputDiv.append(decreaseQuantityButton, quantityInput, increaseQuantityButton);
+    parentElement.append(quantityInputDiv);
+
+}
+
+/*
+<button class="button-cart-quantity">-</button>
+<input class="input-cart-quantity" type="number" value="1" step="1" min="0"></input>
+<button class="button-cart-quantity">+</button>*/
 
 
 // When the add button is clicked for a specific product id
