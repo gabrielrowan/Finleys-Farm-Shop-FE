@@ -1,3 +1,6 @@
+//If I click on the add button, the cart total increases by 1
+
+
 // Checks if DOM is ready before executing javascript referencing DOM elements
 document.addEventListener("DOMContentLoaded", function ()
 {
@@ -18,16 +21,27 @@ const addAddButtonFunctionality = () =>
 
 
 // Removes add button from product card and replaces it with quantity input controls
-const addButtonClicked = (event) =>
+// Increases cart count by 1
+const addButtonClicked = event =>
 {
     const buttonParent = event.target.parentElement;
     const addButton = buttonParent.getElementsByClassName("add-to-cart")[0];
     addButton.remove();
     addCartItemInput(buttonParent);
+    addItemToCart();
+}
+
+//Increases total cart item count by 1
+const addItemToCart = () =>
+{
+    const cartCountElement = document.getElementById("cart-count");
+    const currentCartCount = parseInt(cartCountElement.innerText);
+    cartCountElement.innerText = currentCartCount + 1;
+
 }
 
 // Creates elements for quantity input controls and appends it to the product card
-const addCartItemInput = (parentElement) =>
+const addCartItemInput = parentElement =>
 {
     const increaseQuantityButton = document.createElement("button");
     increaseQuantityButton.className = "button-cart-quantity";
