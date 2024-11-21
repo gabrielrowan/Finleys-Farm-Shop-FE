@@ -95,6 +95,7 @@ const addCartItemInput = parentElement =>
     quantityInput.type = "number";
     quantityInput.step = 1;
     quantityInput.min = 0;
+    quantityInput.disabled = "disabled";
     quantityInput.className = "input-cart-quantity";
 
     quantityInputDiv.append(decreaseQuantityButton, quantityInput, increaseQuantityButton);
