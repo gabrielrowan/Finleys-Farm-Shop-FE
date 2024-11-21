@@ -26,10 +26,14 @@ const changeQuantity = (changeType, event, addButton) =>
 {
     const quantityInput = event.target.parentElement.querySelector(".input-cart-quantity");
     const currentQuantity = parseInt(quantityInput.value);
+    const maxQuantity = 15;
 
     switch (changeType) {
         case ("add"):
             quantityInput.value = currentQuantity + 1;
+            if ((currentQuantity + 1) > maxQuantity) {
+                quantityInput.value = maxQuantity;
+            }
             break;
         case("subtract"):
             quantityInput.value = currentQuantity - 1;
