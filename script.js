@@ -40,6 +40,7 @@ const changeQuantity = (changeType, event, addButton) =>
             if ((currentQuantity - 1) == 0) {
                 event.target.parentElement.remove();
                 addButton.style.display = "block";
+                changeCartItemTotal("subtract");
             }
             break;
     }
@@ -65,17 +66,32 @@ const addButtonClicked = event =>
     const addButton = buttonParent.querySelector(".add-to-cart");
     addButton.style.display = "none";
     addCartItemInput(buttonParent);
-    addItemToCart();
+    changeCartItemTotal("add");
     addQuantityButtonsFunctionality(buttonParent, addButton);
 }
 
-//Increases total cart item count by 1
-const addItemToCart = () =>
+//changeType can be "add" or "subtract". Depending on changeType, cartItemTotal is increased or decreased by 1
+const changeCartItemTotal = changeType =>
 {
     const cartCountElement = document.getElementById("cart-count");
     const currentCartCount = parseInt(cartCountElement.innerText);
-    cartCountElement.innerText = currentCartCount + 1;
 
+    switch (changeType) {
+        case ("add"):
+            cartCountElement.innerText = currentCartCount + 1;
+            break;
+        case ("subtract"):
+            cartCountElement.innerText = currentCartCount - 1;
+
+    }
+
+
+}
+
+const removeItemFromCart = () => {
+    const cartCountElement = document.getElementById("cart-count");
+    const currentCartCount = parseInt(cartCountElement.innerText);
+    cartCountElement.innerText = currentCartCount - 1;
 }
 
 // Creates elements for quantity input controls and appends it to the product card
