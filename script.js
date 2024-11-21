@@ -22,7 +22,7 @@ const addAddButtonFunctionality = () =>
 }
 
 // Increase quantity of cart item
-const changeQuantity = (changeType, event) =>
+const changeQuantity = (changeType, event, addButton) =>
 {
     const quantityInput = event.target.parentElement.querySelector(".input-cart-quantity");
     const currentQuantity = parseInt(quantityInput.value);
@@ -33,20 +33,21 @@ const changeQuantity = (changeType, event) =>
             break;
         case("subtract"):
             quantityInput.value = currentQuantity - 1;
+            if ((currentQuantity - 1) == 0) {
+                event.target.parentElement.remove();
+                addButton.style.display = "block";
+            }
             break;
-
-
     }
-
 }
 
 // Adds functionality to increase quantity button
-const addQuantityButtonsFunctionality = buttonParent =>
+const addQuantityButtonsFunctionality = (buttonParent, addButton) =>
 {
     const increaseQuantityButton = buttonParent.querySelector(".increase-quantity");
-    increaseQuantityButton.addEventListener("click", (event) => changeQuantity("add", event));
+    increaseQuantityButton.addEventListener("click", (event) => changeQuantity("add", event, addButton));
     const decreaseQuantityButton = buttonParent.querySelector(".decrease-quantity");
-    decreaseQuantityButton.addEventListener("click", (event) => changeQuantity("subtract", event));
+    decreaseQuantityButton.addEventListener("click", (event) => changeQuantity("subtract", event, addButton));
 
 }
 
@@ -57,11 +58,11 @@ const addQuantityButtonsFunctionality = buttonParent =>
 const addButtonClicked = event =>
 {
     const buttonParent = event.target.parentElement;
-    const addButton = buttonParent.getElementsByClassName("add-to-cart")[0];
-    addButton.remove();
+    const addButton = buttonParent.querySelector(".add-to-cart");
+    addButton.style.display = "none";
     addCartItemInput(buttonParent);
     addItemToCart();
-    addQuantityButtonsFunctionality(buttonParent);
+    addQuantityButtonsFunctionality(buttonParent, addButton);
 }
 
 //Increases total cart item count by 1
