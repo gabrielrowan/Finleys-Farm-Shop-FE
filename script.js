@@ -22,26 +22,38 @@ const addAddButtonFunctionality = () =>
 }
 
 // Increase quantity of cart item
-const increaseQuantity = event =>
+const changeQuantity = (changeType, event) =>
 {
     const quantityInput = event.target.parentElement.querySelector(".input-cart-quantity");
     const currentQuantity = parseInt(quantityInput.value);
-    quantityInput.value = currentQuantity + 1;
+
+    switch (changeType) {
+        case ("add"):
+            quantityInput.value = currentQuantity + 1;
+            break;
+        case("subtract"):
+            quantityInput.value = currentQuantity - 1;
+            break;
+
+
+    }
 
 }
 
 // Adds functionality to increase quantity button
-const addIncreaseQuantityButtonFunctionality = buttonParent =>
+const addQuantityButtonsFunctionality = buttonParent =>
 {
     const increaseQuantityButton = buttonParent.querySelector(".increase-quantity");
-    increaseQuantityButton.addEventListener("click", increaseQuantity);
+    increaseQuantityButton.addEventListener("click", (event) => changeQuantity("add", event));
+    const decreaseQuantityButton = buttonParent.querySelector(".decrease-quantity");
+    decreaseQuantityButton.addEventListener("click", (event) => changeQuantity("subtract", event));
 
 }
 
 
 // Removes add button from product card and replaces it with quantity input controls
 // Increases cart count by 1
-// Adds functionality to increase quantity button so that it increases cart item quantity by 1
+// Adds functionality to quantity buttons so that they can increase and decrease by 1
 const addButtonClicked = event =>
 {
     const buttonParent = event.target.parentElement;
@@ -49,7 +61,7 @@ const addButtonClicked = event =>
     addButton.remove();
     addCartItemInput(buttonParent);
     addItemToCart();
-    addIncreaseQuantityButtonFunctionality(buttonParent);
+    addQuantityButtonsFunctionality(buttonParent);
 }
 
 //Increases total cart item count by 1
