@@ -17,7 +17,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -66,6 +66,36 @@ body {
 .cart-total {
     margin-left: 1.5rem;
     font-size: 1.2rem;
+}
+
+.shopping-cart-modal-overlay {
+    position: fixed;
+    inset: 0px;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.body-no-scroll {
+    overflow: hidden;
+    /* Disables scrolling */
+    height: 100%;
+    /* Prevents scrollbars */
+}
+
+.shopping-cart-modal-content {
+    overflow: hidden;
+    border: 0.07rem solid #e2e8ed;
+    border-radius: 0.5rem;
+    border-start-end-radius: 0px;
+    border-end-end-radius: 0px;
+    position: fixed;
+    block-size: 100%;
+    padding: 0px;
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+    background-color: rgb(255, 255, 255);
+    inline-size: 360px;
+    inset-inline-end: 0px;
 }
 
 .add-to-cart {
