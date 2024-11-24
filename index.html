@@ -41,21 +41,33 @@
             <h1 class="banner-title">Finley's Farm Shop</h1>
         </div>
     </header>
-    <div class="shopping-cart-modal-overlay">
-        <div class="shopping-cart-modal-content">
-            <div class="shopping-cart-header">
-                <h1>Trolley</h1>
+    <div class="cart-modal-overlay">
+        <div class="cart-modal-content">
+            <div class="cart-header">
+                <h1>Trolley (1 items)</h1>
                 <span>close</span>
             </div>
             <div class="cart-item">
-                <img class="cart-item-img" />
-                <div class="cart-item-details">
-                    <h3 class="cart-item-description">description!</h3>
-                    <span class="cart-item-price">£1.00</span>
-                    <div class="input-cart-quantity">
-                    </div>
+                <img class="cart-item-img" src="img/artichoke.jpg" alt="artichoke"/>
+                <p class="cart-item-description">Artichoke</p>
+                <span class="cart-item-price">£1.00</span>
+                <div class="cart-item-quantity">
+                    <button class="button-cart-quantity decrease-quantity">-</button>
+                    <input type="number" value="1" step="1" min="0" disabled="disabled" class="input-cart-quantity">
+                    <button class="button-cart-quantity increase-quantity">+</button>
                 </div>
             </div>
+            <div class="cart-footer">
+                <div class="cart-subtotal-section">
+                    <p class="cart-subtotal-title">Subtotal (excl. delivery)</p>
+                    <span class="cart-subtotal">£1.45</span>
+                </div>
+                <div class="cart-footer-buttons">
+                    <button>View Trolley</button>
+                    <button>Go to checkout</button>
+                </div>
+            </div>
+
         </div>
     </div>
     <main>

@@ -68,21 +68,14 @@ body {
     font-size: 1.2rem;
 }
 
-.shopping-cart-modal-overlay {
+.cart-modal-overlay {
     position: fixed;
     inset: 0px;
     z-index: 2;
     background-color: rgba(0, 0, 0, 0.75);
 }
 
-.body-no-scroll {
-    overflow: hidden;
-    /* Disables scrolling */
-    height: 100%;
-    /* Prevents scrollbars */
-}
-
-.shopping-cart-modal-content {
+.cart-modal-content {
     overflow: hidden;
     border: 0.07rem solid #e2e8ed;
     border-radius: 0.5rem;
@@ -93,9 +86,48 @@ body {
     padding: 0px;
     display: grid;
     grid-template-rows: min-content 1fr min-content;
-    background-color: rgb(255, 255, 255);
+    background-color: #f6edd9;
     inline-size: 360px;
     inset-inline-end: 0px;
+    padding: 0.5rem;
+}
+
+.cart-header {
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    margin-bottom: 1rem;
+}
+
+.cart-item {
+    display: grid;
+    grid: "image description description"
+        "image price quantity";
+    height: min-content;
+    background-color: #f6edd9;
+    border-radius: 0.5rem;
+    gap: 0.4rem;
+    align-items: center;
+    border: 0.5px solid grey;
+}
+
+.cart-item-img {
+    grid-area: image;
+    inline-size: 100%;
+    border-radius: 0.5rem 0 0 0.5rem;
+
+}
+
+.cart-item-description {
+    grid-area: description;
+}
+
+.cart-item-price {
+    grid-area: price;
+    font-weight: 500;
+}
+
+.cart-item-quantity {
+    grid-area: quantity;
 }
 
 .add-to-cart {
@@ -107,7 +139,7 @@ body {
     height: 2.4rem;
 }
 
-.cart-items-control {
+.cart-items-control, .cart-item-quantity  {
     width: 100%;
     display: flex;
     margin: 1rem 0;
