@@ -131,8 +131,29 @@ body {
     font-weight: 500;
 }
 
+.cart-subtotal {
+    font-weight: 500;
+}
+
+.checkout-button {
+    background-color: #a2af9f;
+    border: none;
+    padding: 0.5rem;
+}
+
 .cart-item-quantity {
     grid-area: quantity;
+}
+
+.cart-subtotal-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.cart-footer-section {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .add-to-cart {
