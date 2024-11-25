@@ -1,4 +1,3 @@
-//If I click on the increae quantity button it adds 1 to the quantity
 
 
 // Checks if DOM is ready before executing javascript referencing DOM elements
@@ -7,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function ()
     hideModalByDefault();
     addAddButtonFunctionality();
     addModalEventListeners();
+    initialiseCart();
 
 });
 
@@ -67,12 +67,13 @@ const addQuantityButtonsFunctionality = (buttonParent, addButton) =>
 // Adds functionality to quantity buttons so that they can increase and decrease by 1
 const addButtonClicked = event =>
 {
-    const buttonParent = event.target.parentElement;
-    const addButton = buttonParent.querySelector(".add-to-cart");
+    const shopItemContent = event.target.parentElement;
+    const addButton = shopItemContent.querySelector(".add-to-cart");
     addButton.style.display = "none";
-    addCartItemInput(buttonParent);
+    addCartItemInput(shopItemContent);
     changeCartItemTotal("add");
-    addQuantityButtonsFunctionality(buttonParent, addButton);
+    addQuantityButtonsFunctionality(shopItemContent, addButton);
+    addCartItemToLocalStorageCart(shopItemContent);
 }
 
 //changeType can be "add" or "subtract". Depending on changeType, cartItemTotal is increased or decreased by 1
@@ -156,4 +157,31 @@ const toggleModal = () =>
     {
         modal.style.display = "block";
     }
+}
+
+const initialiseCart = () =>
+{
+    if (!localStorage.getItem("cart"))
+    {
+        localStorage.setItem("cart", "[]");
+    }
+}
+
+const addCartItemToLocalStorageCart = (shopItemContent) =>
+{
+    const product = {};
+    const productId = shopItemContent.parentElement.dataset.id;
+    const productName = shopItemContent.querySelector('.shop-item-title').textContent;
+    const productPrice = shopItemContent.querySelector('.shop-item-price').textContent;
+    const productQuantity = shopItemContent.querySelector('.input-cart-quantity').value;
+
+    product.id = productId;
+    product.name = productName;
+    product.price = productPrice;
+    product.quantity = productQuantity;
+    console.log(product);
+
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    cart.push(product);
+    localStorage.setItem("cart", JSON.stringify(cart));
 }
