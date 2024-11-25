@@ -4,7 +4,9 @@
 // Checks if DOM is ready before executing javascript referencing DOM elements
 document.addEventListener("DOMContentLoaded", function ()
 {
+    hideModalByDefault();
     addAddButtonFunctionality();
+    addModalEventListeners();
 
 });
 
@@ -28,16 +30,19 @@ const changeQuantity = (changeType, event, addButton) =>
     const currentQuantity = parseInt(quantityInput.value);
     const maxQuantity = 15;
 
-    switch (changeType) {
+    switch (changeType)
+    {
         case ("add"):
             quantityInput.value = currentQuantity + 1;
-            if ((currentQuantity + 1) > maxQuantity) {
+            if ((currentQuantity + 1) > maxQuantity)
+            {
                 quantityInput.value = maxQuantity;
             }
             break;
-        case("subtract"):
+        case ("subtract"):
             quantityInput.value = currentQuantity - 1;
-            if ((currentQuantity - 1) == 0) {
+            if ((currentQuantity - 1) == 0)
+            {
                 event.target.parentElement.remove();
                 addButton.style.display = "block";
                 changeCartItemTotal("subtract");
@@ -76,7 +81,8 @@ const changeCartItemTotal = changeType =>
     const cartCountElement = document.getElementById("cart-count");
     const currentCartCount = parseInt(cartCountElement.innerText);
 
-    switch (changeType) {
+    switch (changeType)
+    {
         case ("add"):
             cartCountElement.innerText = currentCartCount + 1;
             break;
@@ -88,7 +94,8 @@ const changeCartItemTotal = changeType =>
 
 }
 
-const removeItemFromCart = () => {
+const removeItemFromCart = () =>
+{
     const cartCountElement = document.getElementById("cart-count");
     const currentCartCount = parseInt(cartCountElement.innerText);
     cartCountElement.innerText = currentCartCount - 1;
@@ -123,3 +130,27 @@ const addCartItemInput = parentElement =>
 
 }
 
+const addModalEventListeners = () =>
+{
+    const modalCloseButton = document.querySelector(".close-cart-modal");
+    modalCloseButton.addEventListener("click", closeCartModal);
+
+    const modalOpenLink = document.querySelector(".cart-icon-container");
+    modalOpenLink.addEventListener("click", openCartModal);
+}
+
+const hideModalByDefault = () =>
+{
+    document.querySelector(".cart-modal-overlay").style.display = "none";
+
+}
+
+const openCartModal = () =>
+{
+    document.querySelector(".cart-modal-overlay").style.display = "block";
+}
+
+const closeCartModal = (event) =>
+{
+    document.querySelector(".cart-modal-overlay").style.display = "none";
+}
