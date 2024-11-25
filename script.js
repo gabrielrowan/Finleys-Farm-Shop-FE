@@ -133,10 +133,10 @@ const addCartItemInput = parentElement =>
 const addModalEventListeners = () =>
 {
     const modalCloseButton = document.querySelector(".close-cart-modal");
-    modalCloseButton.addEventListener("click", closeCartModal);
+    modalCloseButton.addEventListener("click", toggleModal);
 
     const modalOpenLink = document.querySelector(".cart-icon-container");
-    modalOpenLink.addEventListener("click", openCartModal);
+    modalOpenLink.addEventListener("click", toggleModal);
 }
 
 const hideModalByDefault = () =>
@@ -145,12 +145,15 @@ const hideModalByDefault = () =>
 
 }
 
-const openCartModal = () =>
+const toggleModal = () =>
 {
-    document.querySelector(".cart-modal-overlay").style.display = "block";
-}
-
-const closeCartModal = (event) =>
-{
-    document.querySelector(".cart-modal-overlay").style.display = "none";
+    const modal = document.querySelector(".cart-modal-overlay");
+    const displayStatus = modal.style.display;
+    if (displayStatus === "block")
+    {
+        modal.style.display = "none";
+    } else if (displayStatus === "none")
+    {
+        modal.style.display = "block";
+    }
 }
