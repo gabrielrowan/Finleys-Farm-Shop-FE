@@ -24,23 +24,27 @@ const addAddButtonFunctionality = () =>
 }
 
 // Increase quantity of cart item
-const changeQuantity = (changeType, event, addButton) =>
+const changeQuantity = (changeType, event, addButton, productId) =>
 {
     const quantityInput = event.target.parentElement.querySelector(".input-cart-quantity");
     const currentQuantity = parseInt(quantityInput.value);
     const maxQuantity = 15;
+    let updatedQuantity = 0;
 
     switch (changeType)
     {
         case ("add"):
-            quantityInput.value = currentQuantity + 1;
+            updatedQuantity = currentQuantity + 1;
+            quantityInput.value = updatedQuantity;
             if ((currentQuantity + 1) > maxQuantity)
             {
-                quantityInput.value = maxQuantity;
+                updatedQuantity = maxQuantity;
+                quantityInput.value = updatedQuantity;
             }
             break;
         case ("subtract"):
-            quantityInput.value = currentQuantity - 1;
+            updatedQuantity = currentQuantity - 1;
+            quantityInput.value = updatedQuantity;
             if ((currentQuantity - 1) == 0)
             {
                 event.target.parentElement.remove();
@@ -49,15 +53,18 @@ const changeQuantity = (changeType, event, addButton) =>
             }
             break;
     }
+
+    //change the quantity in local storage for the product being updated
+    updateQuantityLocalStorage(productId, updatedQuantity);
 }
 
 // Adds functionality to increase quantity button
-const addQuantityButtonsFunctionality = (buttonParent, addButton) =>
+const addQuantityButtonsFunctionality = (buttonParent, addButton, productId) =>
 {
     const increaseQuantityButton = buttonParent.querySelector(".increase-quantity");
-    increaseQuantityButton.addEventListener("click", (event) => changeQuantity("add", event, addButton));
+    increaseQuantityButton.addEventListener("click", (event) => changeQuantity("add", event, addButton, productId));
     const decreaseQuantityButton = buttonParent.querySelector(".decrease-quantity");
-    decreaseQuantityButton.addEventListener("click", (event) => changeQuantity("subtract", event, addButton));
+    decreaseQuantityButton.addEventListener("click", (event) => changeQuantity("subtract", event, addButton, productId));
 
 }
 
@@ -69,11 +76,12 @@ const addButtonClicked = event =>
 {
     const shopItemContent = event.target.parentElement;
     const addButton = shopItemContent.querySelector(".add-to-cart");
+    const productId = shopItemContent.parentElement.dataset.id;
     addButton.style.display = "none";
     addCartItemInput(shopItemContent);
     changeCartItemTotal("add");
-    addQuantityButtonsFunctionality(shopItemContent, addButton);
-    addCartItemToLocalStorageCart(shopItemContent);
+    addQuantityButtonsFunctionality(shopItemContent, addButton, productId);
+    addCartItemToLocalStorageCart(shopItemContent, productId);
 }
 
 //changeType can be "add" or "subtract". Depending on changeType, cartItemTotal is increased or decreased by 1
@@ -167,10 +175,9 @@ const initialiseCart = () =>
     }
 }
 
-const addCartItemToLocalStorageCart = (shopItemContent) =>
+const addCartItemToLocalStorageCart = (shopItemContent, productId) =>
 {
     const product = {};
-    const productId = shopItemContent.parentElement.dataset.id;
     const productName = shopItemContent.querySelector('.shop-item-title').textContent;
     const productPrice = shopItemContent.querySelector('.shop-item-price').textContent;
     const productQuantity = shopItemContent.querySelector('.input-cart-quantity').value;
@@ -184,4 +191,22 @@ const addCartItemToLocalStorageCart = (shopItemContent) =>
     const cart = JSON.parse(localStorage.getItem("cart"));
     cart.push(product);
     localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+
+const updateQuantityLocalStorage = (productId, quantity) =>
+{
+
+    const cart = JSON.parse(localStorage.getItem("cart"));
+
+    for (let product of cart)
+    {
+        if (product.id == productId)
+        {
+            product.quantity = quantity;
+        }
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
 }
