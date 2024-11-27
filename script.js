@@ -50,6 +50,7 @@ const changeQuantity = (changeType, event, addButton, productId) =>
                 event.target.parentElement.remove();
                 addButton.style.display = "block";
                 changeCartItemTotal("subtract");
+                removeCartItemFromLocalStorage(productId);
             }
             break;
     }
@@ -103,12 +104,6 @@ const changeCartItemTotal = changeType =>
 
 }
 
-const removeItemFromCart = () =>
-{
-    const cartCountElement = document.getElementById("cart-count");
-    const currentCartCount = parseInt(cartCountElement.innerText);
-    cartCountElement.innerText = currentCartCount - 1;
-}
 
 // Creates elements for quantity input controls and appends it to the product card
 const addCartItemInput = parentElement =>
@@ -208,5 +203,15 @@ const updateQuantityLocalStorage = (productId, quantity) =>
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
+
+}
+
+const removeCartItemFromLocalStorage = (productId) =>
+{
+    const cart = JSON.parse(localStorage.getItem("cart"));
+
+    // returns new array with all items other than the item with a matching productid
+    let temp = cart.filter(item => item.id != productId);
+    localStorage.setItem("cart", JSON.stringify(temp));
 
 }
