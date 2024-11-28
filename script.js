@@ -73,6 +73,7 @@ const addQuantityButtonsFunctionality = (buttonParent, addButton, productId) =>
 // Removes add button from product card and replaces it with quantity input controls
 // Increases cart count by 1
 // Adds functionality to quantity buttons so that they can increase and decrease by 1
+// Adds cart item to local storage
 const addButtonClicked = event =>
 {
     const shopItemContent = event.target.parentElement;
@@ -86,21 +87,40 @@ const addButtonClicked = event =>
 }
 
 //changeType can be "add" or "subtract". Depending on changeType, cartItemTotal is increased or decreased by 1
+//changes cart modal item count and cart count badge
 const changeCartItemTotal = changeType =>
 {
-    const cartCountElement = document.getElementById("cart-count");
+    const cartCountElement = document.querySelector(".cart-count");
     const currentCartCount = parseInt(cartCountElement.innerText);
+    const modalCartCountElement = document.querySelector(".cart-header-title");
+
+    let updatedCartCount = 0;
 
     switch (changeType)
     {
         case ("add"):
-            cartCountElement.innerText = currentCartCount + 1;
+            updatedCartCount = currentCartCount + 1;
+            cartCountElement.innerText = updatedCartCount;
             break;
         case ("subtract"):
-            cartCountElement.innerText = currentCartCount - 1;
-
+            updatedCartCount = currentCartCount - 1;
+            cartCountElement.innerText = updatedCartCount;
     }
 
+    if (updatedCartCount === 1)
+    {
+        modalCartCountElement.innerText = `Trolley (${updatedCartCount} item)`;
+
+    }
+    else if (updatedCartCount > 1)
+    {
+        modalCartCountElement.innerText = `Trolley (${updatedCartCount} items)`;
+
+    }
+    else
+    {
+        modalCartCountElement.innerText = `Trolley (0 items)`;
+    }
 
 }
 
@@ -172,6 +192,7 @@ const initialiseCart = () =>
     {
         localStorage.setItem("cart", "[]");
     }
+
 }
 
 //adds cart item to local storage
