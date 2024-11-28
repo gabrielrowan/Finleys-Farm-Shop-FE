@@ -122,6 +122,10 @@ const changeCartItemTotal = changeType =>
         modalCartCountElement.innerText = `Trolley (0 items)`;
     }
 
+    //update price total 
+    const totalPrice = getCartTotal();
+    displayCartTotal(totalPrice);
+
 }
 
 
@@ -262,4 +266,23 @@ const addCartItemDOM = (product) =>
                     </div>
                 </div>`;
 
+}
+
+const getCartTotal = () =>
+{
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    const total = cart.reduce((sum, product) =>
+    {
+        const price = parseFloat(product.price.replace('£', ''));
+        const quantity = parseInt(product.quantity, 10);
+        return sum + (price * quantity);
+    }, 0);
+
+    return total;
+}
+
+const displayCartTotal = (sum) =>
+{
+    const cartTotalElement = document.querySelector(".cart-subtotal");
+    cartTotalElement.innerText = `£${sum.toFixed(2)}`;
 }
