@@ -134,6 +134,7 @@ const addCartItemInput = parentElement =>
 
 }
 
+//adds ability to open and close shopping cart modal
 const addModalEventListeners = () =>
 {
     const modalCloseButton = document.querySelector(".close-cart-modal");
@@ -143,12 +144,14 @@ const addModalEventListeners = () =>
     modalOpenLink.addEventListener("click", toggleModal);
 }
 
+//hides modal by default on page load
 const hideModalByDefault = () =>
 {
     document.querySelector(".cart-modal-overlay").style.display = "none";
 
 }
 
+//toggles modal between being hidden and displaying depending on its previous state
 const toggleModal = () =>
 {
     const modal = document.querySelector(".cart-modal-overlay");
@@ -162,6 +165,7 @@ const toggleModal = () =>
     }
 }
 
+//initialises cart to an empty array on page load
 const initialiseCart = () =>
 {
     if (!localStorage.getItem("cart"))
@@ -170,25 +174,29 @@ const initialiseCart = () =>
     }
 }
 
+//adds cart item to local storage
 const addCartItemToLocalStorageCart = (shopItemContent, productId) =>
 {
     const product = {};
     const productName = shopItemContent.querySelector('.shop-item-title').textContent;
     const productPrice = shopItemContent.querySelector('.shop-item-price').textContent;
     const productQuantity = shopItemContent.querySelector('.input-cart-quantity').value;
+    const productImg = shopItemContent.parentElement.querySelector(".shop-item-img").src;
 
     product.id = productId;
     product.name = productName;
     product.price = productPrice;
     product.quantity = productQuantity;
-    console.log(product);
+    product.image = productImg;
+
+    addCartItemDOM(product);
 
     const cart = JSON.parse(localStorage.getItem("cart"));
     cart.push(product);
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-
+//updates quantity of cart item in local storage
 const updateQuantityLocalStorage = (productId, quantity) =>
 {
 
@@ -206,6 +214,7 @@ const updateQuantityLocalStorage = (productId, quantity) =>
 
 }
 
+//removes cart item from local storage
 const removeCartItemFromLocalStorage = (productId) =>
 {
     const cart = JSON.parse(localStorage.getItem("cart"));
@@ -213,5 +222,23 @@ const removeCartItemFromLocalStorage = (productId) =>
     // returns new array with all items other than the item with a matching productid
     let temp = cart.filter(item => item.id != productId);
     localStorage.setItem("cart", JSON.stringify(temp));
+
+}
+
+const addCartItemDOM = (product) =>
+{
+    const cartitemList = document.querySelector(".cart-item-list");
+    cartitemList.innerHTML +=
+        `  <div class="cart-item">
+                    <img class="cart-item-img" src=${product.image} alt=${product.name} />
+                    <p class="cart-item-description">${product.name}</p>
+                    <span class="cart-item-price">${product.price}</span>
+                    <div class="cart-item-quantity">
+                        <button class="button-cart-quantity decrease-quantity">-</button>
+                        <input type="number" value="1" step="1" min="0" disabled="disabled"
+                            class="input-cart-quantity-modal">
+                        <button class="button-cart-quantity increase-quantity">+</button>
+                    </div>
+                </div>`;
 
 }
