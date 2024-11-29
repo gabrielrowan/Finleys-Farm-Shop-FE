@@ -40,7 +40,7 @@ const changeQuantity = (changeType, event, productId, cartModal = false) =>
         case ("subtract"):
             updatedQuantity = currentQuantity - 1;
 
-            if (updatedQuantity === 0 && cartModal === false)
+            if (updatedQuantity === 0)
             {
 
                 ReturnToCartAddButton(shopItemContent);
@@ -53,7 +53,7 @@ const changeQuantity = (changeType, event, productId, cartModal = false) =>
             break;
     }
 
-    syncQuantityInputValue(updatedQuantity, quantityInput, productId);
+    syncQuantityInputValue(updatedQuantity, productId);
 
 
 
@@ -62,16 +62,24 @@ const changeQuantity = (changeType, event, productId, cartModal = false) =>
 
 }
 
-const syncQuantityInputValue = (updatedQuantity, quantityInput, productId) =>
+//updates quantity for cart item in product list and in cart modal
+const syncQuantityInputValue = (updatedQuantity, productId) =>
 {
-    //Updates quantity input from product list
-    quantityInput.value = updatedQuantity;
-    //Updates quantity input from cart item in modal
-    const cartItemList = document.querySelector(".cart-item-list");
-    const matchingModalCartItem = cartItemList.querySelector(`[data-id="${productId}"]`);
-    const modalCartItemInputElement = matchingModalCartItem.querySelector(".input-cart-quantity");
+    const cartItemListModalClassName = "cart-item-list";
+    const cartItemProductList = "shop-items";
+    UpdateQuantityInputValue(cartItemListModalClassName, productId, updatedQuantity);
+    UpdateQuantityInputValue(cartItemProductList, productId, updatedQuantity);
+
+}
+
+const UpdateQuantityInputValue = (containerElementClassName, productId, updatedQuantity) =>
+{
+    const containerElement = document.querySelector(`.${containerElementClassName}`);
+    const matchingCartItem = containerElement.querySelector(`[data-id="${productId}"]`);
+    const modalCartItemInputElement = matchingCartItem.querySelector(".input-cart-quantity");
     modalCartItemInputElement.value = updatedQuantity;
 }
+
 
 const ReturnToCartAddButton = (parentElement) =>
 {
@@ -82,11 +90,11 @@ const ReturnToCartAddButton = (parentElement) =>
 }
 
 // Adds functionality to increase quantity button
-const addQuantityButtonsFunctionality = (buttonParent, productId, cartModal = false) =>
+const addQuantityButtonsFunctionality = (parentElement, productId, cartModal = false) =>
 {
-    const increaseQuantityButton = buttonParent.querySelector(".increase-quantity");
+    const increaseQuantityButton = parentElement.querySelector(".increase-quantity");
     increaseQuantityButton.addEventListener("click", (event) => changeQuantity("add", event, productId, cartModal));
-    const decreaseQuantityButton = buttonParent.querySelector(".decrease-quantity");
+    const decreaseQuantityButton = parentElement.querySelector(".decrease-quantity");
     decreaseQuantityButton.addEventListener("click", (event) => changeQuantity("subtract", event, productId, cartModal));
 
 }
@@ -239,8 +247,6 @@ const addCartItemToLocalStorageCart = (shopItemContent, productId) =>
     product.quantity = productQuantity;
     product.image = productImg;
 
-    addCartItemDOM(product);
-
     const cart = JSON.parse(localStorage.getItem("cart"));
 
     //check if item has already been added to the cart first
@@ -248,6 +254,8 @@ const addCartItemToLocalStorageCart = (shopItemContent, productId) =>
     {
         cart.push(product);
         localStorage.setItem("cart", JSON.stringify(cart));
+        addCartItemDOM(product);
+
     }
 
 
@@ -303,6 +311,8 @@ const addCartItemDOM = (product) =>
     const lastCartItemQuantity = cartItem.querySelector(".cart-item-quantity");
     addCartItemInput(lastCartItemQuantity);
 
+    addQuantityButtonsFunctionality(cartItem, product.id, true);
+
 }
 
 const getCartTotal = () =>
@@ -331,3 +341,4 @@ const removeCartItemFromModalDOM = (productId) =>
     matchingModalCartItem.remove();
 
 }
+
