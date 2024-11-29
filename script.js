@@ -26,7 +26,8 @@ const addAddButtonFunctionality = () =>
 // Increase quantity of cart item
 const changeQuantity = (changeType, event, productId, cartModal = false) =>
 {
-    const quantityInput = event.target.parentElement.querySelector(".input-cart-quantity");
+    const shopItemContent = event.target.parentElement.parentElement;
+    const quantityInput = shopItemContent.querySelector(".input-cart-quantity");
     const currentQuantity = parseInt(quantityInput.value);
     const maxQuantity = 15;
     let updatedQuantity = 0;
@@ -38,18 +39,22 @@ const changeQuantity = (changeType, event, productId, cartModal = false) =>
             break;
         case ("subtract"):
             updatedQuantity = currentQuantity - 1;
+
+            if (updatedQuantity === 0 && cartModal === false)
+            {
+
+                ReturnToCartAddButton(shopItemContent);
+                changeCartItemTotal("subtract");
+                removeCartItemFromLocalStorage(productId);
+            }
+
+
             break;
     }
 
     syncQuantityInputValue(updatedQuantity, quantityInput, productId);
 
-    if (updatedQuantity === 0 && cartModal === false)
-    {
 
-        ReturnToCartAddButton(event);
-        changeCartItemTotal("subtract");
-        removeCartItemFromLocalStorage(productId);
-    }
 
     //change the quantity in local storage for the product being updated
     updateQuantityLocalStorage(productId, updatedQuantity);
@@ -67,11 +72,12 @@ const syncQuantityInputValue = (updatedQuantity, quantityInput, productId) =>
     modalCartItemInputElement.value = updatedQuantity;
 }
 
-const ReturnToCartAddButton = (event) =>
+const ReturnToCartAddButton = (parentElement) =>
 {
-    event.target.parentElement.remove();
-    const addButton = event.target.parentElement.querySelector(".add-to-cart");
+    parentElement.querySelector(".cart-items-control").remove();
+    const addButton = parentElement.querySelector(".add-to-cart");
     addButton.style.display = "block";
+
 }
 
 // Adds functionality to increase quantity button
