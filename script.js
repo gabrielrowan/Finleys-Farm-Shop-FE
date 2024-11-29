@@ -40,7 +40,7 @@ const changeQuantity = (changeType, event, productId, cartModal = false) =>
         case ("subtract"):
             updatedQuantity = currentQuantity - 1;
 
-            if (updatedQuantity === 0)
+            if (updatedQuantity === 0 && cartModal == false)
             {
 
                 ReturnToCartAddButton(shopItemContent);
