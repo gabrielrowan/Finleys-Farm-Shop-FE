@@ -84,6 +84,11 @@ const addButtonClicked = event =>
     changeCartItemTotal("add");
     addQuantityButtonsFunctionality(shopItemContent, addButton, productId);
     addCartItemToLocalStorageCart(shopItemContent, productId);
+
+    //update price total 
+    const totalPrice = getCartTotal();
+    displayCartTotal(totalPrice);
+
 }
 
 //changeType can be "add" or "subtract". Depending on changeType, cartItemTotal is increased or decreased by 1
@@ -122,9 +127,6 @@ const changeCartItemTotal = changeType =>
         modalCartCountElement.innerText = `Trolley (0 items)`;
     }
 
-    //update price total 
-    const totalPrice = getCartTotal();
-    displayCartTotal(totalPrice);
 
 }
 
@@ -253,18 +255,22 @@ const removeCartItemFromLocalStorage = (productId) =>
 const addCartItemDOM = (product) =>
 {
     const cartitemList = document.querySelector(".cart-item-list");
-    cartitemList.innerHTML +=
-        `  <div class="cart-item">
-                    <img class="cart-item-img" src=${product.image} alt=${product.name} />
-                    <p class="cart-item-description">${product.name}</p>
-                    <span class="cart-item-price">${product.price}</span>
-                    <div class="cart-item-quantity">
-                        <button class="button-cart-quantity decrease-quantity">-</button>
-                        <input type="number" value="1" step="1" min="0" disabled="disabled"
-                            class="input-cart-quantity-modal">
-                        <button class="button-cart-quantity increase-quantity">+</button>
-                    </div>
-                </div>`;
+
+    const cartItem = document.createElement("div");
+    cartItem.className = "cart-item";
+
+    cartItem.innerHTML = `
+        <img class="cart-item-img" src="${product.image}" alt="${product.name}" />
+        <p class="cart-item-description">${product.name}</p>
+        <span class="cart-item-price">${product.price}</span>
+        <div class="cart-item-quantity"></div>
+    `;
+
+    // Append the new cart item to the list
+    cartitemList.appendChild(cartItem);
+
+    const lastCartItemQuantity = cartItem.querySelector(".cart-item-quantity");
+    addCartItemInput(lastCartItemQuantity);
 
 }
 
