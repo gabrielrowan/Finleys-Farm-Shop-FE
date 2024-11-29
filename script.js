@@ -24,7 +24,7 @@ const addAddButtonFunctionality = () =>
 }
 
 // Increase quantity of cart item
-const changeQuantity = (changeType, event, addButton, productId) =>
+const changeQuantity = (changeType, event, productId, cartModal = false) =>
 {
     const quantityInput = event.target.parentElement.querySelector(".input-cart-quantity");
     const currentQuantity = parseInt(quantityInput.value);
@@ -34,38 +34,53 @@ const changeQuantity = (changeType, event, addButton, productId) =>
     switch (changeType)
     {
         case ("add"):
-            updatedQuantity = currentQuantity + 1;
-            quantityInput.value = updatedQuantity;
-            if ((currentQuantity + 1) > maxQuantity)
-            {
-                updatedQuantity = maxQuantity;
-                quantityInput.value = updatedQuantity;
-            }
+            updatedQuantity = Math.min(currentQuantity + 1, maxQuantity);
             break;
         case ("subtract"):
             updatedQuantity = currentQuantity - 1;
-            quantityInput.value = updatedQuantity;
-            if ((currentQuantity - 1) == 0)
-            {
-                event.target.parentElement.remove();
-                addButton.style.display = "block";
-                changeCartItemTotal("subtract");
-                removeCartItemFromLocalStorage(productId);
-            }
             break;
+    }
+
+    syncQuantityInputValue(updatedQuantity, quantityInput, productId);
+
+    if (updatedQuantity === 0 && cartModal === false)
+    {
+
+        ReturnToCartAddButton(event);
+        changeCartItemTotal("subtract");
+        removeCartItemFromLocalStorage(productId);
     }
 
     //change the quantity in local storage for the product being updated
     updateQuantityLocalStorage(productId, updatedQuantity);
+
+}
+
+const syncQuantityInputValue = (updatedQuantity, quantityInput, productId) =>
+{
+    //Updates quantity input from product list
+    quantityInput.value = updatedQuantity;
+    //Updates quantity input from cart item in modal
+    const cartItemList = document.querySelector(".cart-item-list");
+    const matchingModalCartItem = cartItemList.querySelector(`[data-id="${productId}"]`);
+    const modalCartItemInputElement = matchingModalCartItem.querySelector(".input-cart-quantity");
+    modalCartItemInputElement.value = updatedQuantity;
+}
+
+const ReturnToCartAddButton = (event) =>
+{
+    event.target.parentElement.remove();
+    const addButton = event.target.parentElement.querySelector(".add-to-cart");
+    addButton.style.display = "block";
 }
 
 // Adds functionality to increase quantity button
-const addQuantityButtonsFunctionality = (buttonParent, addButton, productId) =>
+const addQuantityButtonsFunctionality = (buttonParent, productId, cartModal = false) =>
 {
     const increaseQuantityButton = buttonParent.querySelector(".increase-quantity");
-    increaseQuantityButton.addEventListener("click", (event) => changeQuantity("add", event, addButton, productId));
+    increaseQuantityButton.addEventListener("click", (event) => changeQuantity("add", event, productId, cartModal));
     const decreaseQuantityButton = buttonParent.querySelector(".decrease-quantity");
-    decreaseQuantityButton.addEventListener("click", (event) => changeQuantity("subtract", event, addButton, productId));
+    decreaseQuantityButton.addEventListener("click", (event) => changeQuantity("subtract", event, productId, cartModal));
 
 }
 
@@ -74,6 +89,7 @@ const addQuantityButtonsFunctionality = (buttonParent, addButton, productId) =>
 // Increases cart count by 1
 // Adds functionality to quantity buttons so that they can increase and decrease by 1
 // Adds cart item to local storage
+// Update total price
 const addButtonClicked = event =>
 {
     const shopItemContent = event.target.parentElement;
@@ -82,9 +98,8 @@ const addButtonClicked = event =>
     addButton.style.display = "none";
     addCartItemInput(shopItemContent);
     changeCartItemTotal("add");
-    addQuantityButtonsFunctionality(shopItemContent, addButton, productId);
     addCartItemToLocalStorageCart(shopItemContent, productId);
-
+    addQuantityButtonsFunctionality(shopItemContent, productId);
     //update price total 
     const totalPrice = getCartTotal();
     displayCartTotal(totalPrice);
@@ -202,6 +217,7 @@ const initialiseCart = () =>
 }
 
 //adds cart item to local storage
+// adds cart item to DOM
 const addCartItemToLocalStorageCart = (shopItemContent, productId) =>
 {
     const product = {};
@@ -258,6 +274,7 @@ const addCartItemDOM = (product) =>
 
     const cartItem = document.createElement("div");
     cartItem.className = "cart-item";
+    cartItem.dataset.id = product.id;
 
     cartItem.innerHTML = `
         <img class="cart-item-img" src="${product.image}" alt="${product.name}" />
