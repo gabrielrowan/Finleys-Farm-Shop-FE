@@ -46,6 +46,7 @@ const changeQuantity = (changeType, event, productId, cartModal = false) =>
                 ReturnToCartAddButton(shopItemContent);
                 changeCartItemTotal("subtract");
                 removeCartItemFromLocalStorage(productId);
+                removeCartItemFromModalDOM(productId);
             }
 
 
@@ -241,8 +242,15 @@ const addCartItemToLocalStorageCart = (shopItemContent, productId) =>
     addCartItemDOM(product);
 
     const cart = JSON.parse(localStorage.getItem("cart"));
-    cart.push(product);
-    localStorage.setItem("cart", JSON.stringify(cart));
+
+    //check if item has already been added to the cart first
+    if (!cart.some((product) => product.id === productId))
+    {
+        cart.push(product);
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+
 }
 
 //updates quantity of cart item in local storage
@@ -314,4 +322,12 @@ const displayCartTotal = (sum) =>
 {
     const cartTotalElement = document.querySelector(".cart-subtotal");
     cartTotalElement.innerText = `£${sum.toFixed(2)}`;
+}
+
+const removeCartItemFromModalDOM = (productId) =>
+{
+    const cartItemList = document.querySelector(".cart-item-list");
+    const matchingModalCartItem = cartItemList.querySelector(`[data-id="${productId}"]`);
+    matchingModalCartItem.remove();
+
 }
