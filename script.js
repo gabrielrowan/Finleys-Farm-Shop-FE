@@ -142,20 +142,7 @@ const changeCartItemTotal = changeType =>
             cartCountElement.innerText = updatedCartCount;
     }
 
-    if (updatedCartCount === 1)
-    {
-        modalCartCountElement.innerText = `Trolley (${updatedCartCount} item)`;
-
-    }
-    else if (updatedCartCount > 1)
-    {
-        modalCartCountElement.innerText = `Trolley (${updatedCartCount} items)`;
-
-    }
-    else
-    {
-        modalCartCountElement.innerText = `Trolley (0 items)`;
-    }
+    updateModalCartHeaderItemCount(updatedCartCount, modalCartCountElement);
 
 
 }
@@ -221,12 +208,41 @@ const toggleModal = () =>
     }
 }
 
-//initialises cart to an empty array on page load
+//initialises cart to an empty array on page load if cart array doesn't already exist
 const initialiseCart = () =>
 {
-    if (!localStorage.getItem("cart"))
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart.length !== 0)
     {
-        localStorage.setItem("cart", "[]");
+        cart.forEach(product =>
+        {
+            const shopItem = document.querySelector(`.shop-item[data-id="${product.id}"]`);
+            if (shopItem)
+            {
+                const shopItemContent = shopItem.querySelector(".shop-item-content");
+                const addButton = shopItemContent.querySelector(".add-to-cart");
+
+                // Hide "Add" button
+                addButton.style.display = "none";
+
+                // Add input controls
+                addCartItemInput(shopItemContent);
+
+                // Update quantity from localStorage
+                const quantityInput = shopItemContent.querySelector(".input-cart-quantity");
+                quantityInput.value = product.quantity;
+
+                // Add functionality to increase/decrease buttons
+                addQuantityButtonsFunctionality(shopItemContent, product.id);
+
+                //add cart item to the DOM
+                addCartItemDOM(product);
+            }
+        });
+
+        const totalPrice = getCartTotal();
+        displayCartTotal(totalPrice);
     }
 
 }
@@ -340,5 +356,24 @@ const removeCartItemFromModalDOM = (productId) =>
     const matchingModalCartItem = cartItemList.querySelector(`[data-id="${productId}"]`);
     matchingModalCartItem.remove();
 
+}
+
+const updateModalCartHeaderItemCount = (updatedCartCount, modalCartCountElement) =>
+{
+    if (updatedCartCount === 1)
+    {
+        modalCartCountElement.innerText = `Trolley (${updatedCartCount} item)`;
+
+    }
+    else if (updatedCartCount > 1)
+    {
+        modalCartCountElement.innerText = `Trolley (${updatedCartCount} items)`;
+
+    }
+
+    else
+    {
+        modalCartCountElement.innerText = `Trolley (0 items)`;
+    }
 }
 
