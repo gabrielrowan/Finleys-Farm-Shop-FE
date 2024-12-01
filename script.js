@@ -122,12 +122,11 @@ const addButtonClicked = event =>
 }
 
 //changeType can be "add" or "subtract". Depending on changeType, cartItemTotal is increased or decreased by 1
-//changes cart modal item count and cart count badge
+//calls function to change cart modal item count and cart count badge
 const changeCartItemTotal = changeType =>
 {
-    const cartCountElement = document.querySelector(".cart-count");
-    const currentCartCount = parseInt(cartCountElement.innerText);
-    const modalCartCountElement = document.querySelector(".cart-header-title");
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    let currentCartCount = cart.length;
 
     let updatedCartCount = 0;
 
@@ -135,14 +134,12 @@ const changeCartItemTotal = changeType =>
     {
         case ("add"):
             updatedCartCount = currentCartCount + 1;
-            cartCountElement.innerText = updatedCartCount;
             break;
         case ("subtract"):
             updatedCartCount = currentCartCount - 1;
-            cartCountElement.innerText = updatedCartCount;
     }
 
-    updateModalCartHeaderItemCount(updatedCartCount, modalCartCountElement);
+    displayCartItemCountDOM(updatedCartCount);
 
 
 }
@@ -243,6 +240,8 @@ const initialiseCart = () =>
 
         const totalPrice = getCartTotal();
         displayCartTotal(totalPrice);
+
+        fetchCartItemCount();
     }
 
 }
@@ -358,16 +357,25 @@ const removeCartItemFromModalDOM = (productId) =>
 
 }
 
-const updateModalCartHeaderItemCount = (updatedCartCount, modalCartCountElement) =>
+// Updates the display of the cart item count in 2 places: 
+// 1) The cart count badge by the trolley
+// 2) The modal header 
+const displayCartItemCountDOM = (cartCount) =>
 {
-    if (updatedCartCount === 1)
+    const modalCartCountElement = document.querySelector(".cart-header-title");
+    const cartCountElement = document.querySelector(".cart-count");
+
+    cartCountElement.innerText = cartCount;
+
+
+    if (cartCount === 1)
     {
-        modalCartCountElement.innerText = `Trolley (${updatedCartCount} item)`;
+        modalCartCountElement.innerText = `Trolley (${cartCount} item)`;
 
     }
-    else if (updatedCartCount > 1)
+    else if (cartCount > 1)
     {
-        modalCartCountElement.innerText = `Trolley (${updatedCartCount} items)`;
+        modalCartCountElement.innerText = `Trolley (${cartCount} items)`;
 
     }
 
@@ -377,3 +385,9 @@ const updateModalCartHeaderItemCount = (updatedCartCount, modalCartCountElement)
     }
 }
 
+const fetchCartItemCount = () =>
+{
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    const cartCount = cart.length;
+    displayCartItemCountDOM(cartCount);
+}
