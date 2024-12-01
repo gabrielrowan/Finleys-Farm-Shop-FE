@@ -44,13 +44,21 @@ const changeQuantity = (changeType, event, productId, cartModal = false) =>
             syncQuantityInputValue(updatedQuantity, productId);
 
 
-            if (updatedQuantity === 0 && cartModal == false)
+            if (updatedQuantity === 0 && cartModal === false)
             {
 
                 ReturnToCartAddButton(shopItemContent);
                 changeCartItemTotal("subtract");
                 removeCartItemFromLocalStorage(productId);
                 removeCartItemFromModalDOM(productId);
+            }
+            else if (updatedQuantity === 0 && cartModal === true)
+            {
+                changeCartItemTotal("subtract");
+                removeCartItemFromLocalStorage(productId);
+                removeCartItemFromModalDOM(productId);
+
+
             }
 
 
@@ -241,7 +249,7 @@ const initialiseCart = () =>
                 addQuantityButtonsFunctionality(shopItemContent, product.id);
 
                 //add cart item to the DOM
-                addCartItemDOM(product);
+                addCartItemToModalDOM(product);
             }
         });
 
@@ -275,7 +283,7 @@ const addCartItemToLocalStorageCart = (shopItemContent, productId) =>
     {
         cart.push(product);
         localStorage.setItem("cart", JSON.stringify(cart));
-        addCartItemDOM(product);
+        addCartItemToModalDOM(product);
 
     }
 
@@ -311,7 +319,7 @@ const removeCartItemFromLocalStorage = (productId) =>
 
 }
 
-const addCartItemDOM = (product) =>
+const addCartItemToModalDOM = (product) =>
 {
     const cartitemList = document.querySelector(".cart-item-list");
 
