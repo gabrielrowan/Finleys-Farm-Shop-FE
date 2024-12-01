@@ -384,7 +384,8 @@ const fetchCartItemCount = () =>
     const cartCount = cart.length;
     displayCartItemCountDOM(cartCount);
 }
-function GetAndDisplayCartTotalPrice()
+
+const GetAndDisplayCartTotalPrice = () =>
 {
     const totalPrice = getCartTotal();
     displayCartTotal(totalPrice);
