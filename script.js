@@ -147,7 +147,7 @@ const changeCartItemTotal = changeType =>
 
 
 // Creates elements for quantity input controls and appends it to the product card
-const addCartItemInput = parentElement =>
+const addCartItemInput = (parentElement, quantity = 1) =>
 {
     const increaseQuantityButton = document.createElement("button");
     const increaseQuantityButtonClassList = ["button-cart-quantity", "increase-quantity"]
@@ -163,7 +163,7 @@ const addCartItemInput = parentElement =>
     quantityInputDiv.className = "cart-items-control";
 
     const quantityInput = document.createElement("input");
-    quantityInput.value = 1;
+    quantityInput.value = quantity;
     quantityInput.type = "number";
     quantityInput.step = 1;
     quantityInput.min = 0;
@@ -218,7 +218,7 @@ const initialiseCart = () =>
                 addButton.style.display = "none";
 
                 // Add input controls
-                addCartItemInput(shopItemContent);
+                addCartItemInput(shopItemContent, product.quantity);
 
                 // Update quantity from localStorage
                 const quantityInput = shopItemContent.querySelector(".input-cart-quantity");
@@ -317,7 +317,7 @@ const addCartItemToModalDOM = (product) =>
     cartitemList.appendChild(cartItem);
 
     const lastCartItemQuantity = cartItem.querySelector(".cart-item-quantity");
-    addCartItemInput(lastCartItemQuantity);
+    addCartItemInput(lastCartItemQuantity, product.quantity);
 
     addQuantityButtonsFunctionality(cartItem, product.id, true);
 
