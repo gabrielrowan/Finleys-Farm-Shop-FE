@@ -3,7 +3,6 @@
 // Checks if DOM is ready before executing javascript referencing DOM elements
 document.addEventListener("DOMContentLoaded", function ()
 {
-    hideModalByDefault();
     addAddButtonFunctionality();
     addModalEventListeners();
     initialiseCart();
@@ -24,10 +23,11 @@ const addAddButtonFunctionality = () =>
 }
 
 // Increase quantity of cart item
-const changeQuantity = (changeType, event, productId, cartModal = false) =>
+const changeQuantity = (changeType, event, productId) =>
 {
-    const shopItemContent = event.target.parentElement.parentElement;
-    const quantityInput = shopItemContent.querySelector(".input-cart-quantity");
+    const containerElement = document.querySelector(`.shop-items`);
+    const matchingCartItem = containerElement.querySelector(`[data-id="${productId}"]`);
+    const quantityInput = matchingCartItem.querySelector(".input-cart-quantity");
     const currentQuantity = parseInt(quantityInput.value);
     const maxQuantity = 15;
     let updatedQuantity = 0;
@@ -44,21 +44,13 @@ const changeQuantity = (changeType, event, productId, cartModal = false) =>
             syncQuantityInputValue(updatedQuantity, productId);
 
 
-            if (updatedQuantity === 0 && cartModal === false)
+            if (updatedQuantity === 0)
             {
 
-                ReturnToCartAddButton(shopItemContent);
+                ReturnToCartAddButton(matchingCartItem);
                 changeCartItemTotal("subtract");
                 removeCartItemFromLocalStorage(productId);
                 removeCartItemFromModalDOM(productId);
-            }
-            else if (updatedQuantity === 0 && cartModal === true)
-            {
-                changeCartItemTotal("subtract");
-                removeCartItemFromLocalStorage(productId);
-                removeCartItemFromModalDOM(productId);
-
-
             }
 
 
@@ -101,12 +93,12 @@ const ReturnToCartAddButton = (parentElement) =>
 }
 
 // Adds functionality to increase quantity button
-const addQuantityButtonsFunctionality = (parentElement, productId, cartModal = false) =>
+const addQuantityButtonsFunctionality = (parentElement, productId) =>
 {
     const increaseQuantityButton = parentElement.querySelector(".increase-quantity");
-    increaseQuantityButton.addEventListener("click", (event) => changeQuantity("add", event, productId, cartModal));
+    increaseQuantityButton.addEventListener("click", (event) => changeQuantity("add", event, productId));
     const decreaseQuantityButton = parentElement.querySelector(".decrease-quantity");
-    decreaseQuantityButton.addEventListener("click", (event) => changeQuantity("subtract", event, productId, cartModal));
+    decreaseQuantityButton.addEventListener("click", (event) => changeQuantity("subtract", event, productId));
 
 }
 
@@ -193,26 +185,13 @@ const addModalEventListeners = () =>
     modalOpenLink.addEventListener("click", toggleModal);
 }
 
-//hides modal by default on page load
-const hideModalByDefault = () =>
-{
-    document.querySelector(".cart-modal-overlay").style.display = "none";
 
-}
-
-//toggles modal between being hidden and displaying depending on its previous state
+//toggles modal between being hidden and displaying 
 const toggleModal = () =>
 {
     const modal = document.querySelector(".cart-modal-overlay");
-    const displayStatus = modal.style.display;
-    if (displayStatus === "block")
-    {
-        modal.style.display = "none";
-    } else if (displayStatus === "none")
-    {
-        modal.style.display = "block";
-    }
-}
+    modal.classList.toggle("active");
+};
 
 //initialises cart to an empty array on page load if cart array doesn't already exist
 const initialiseCart = () =>

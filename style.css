@@ -73,6 +73,11 @@ body {
     inset: 0px;
     z-index: 2;
     background-color: rgba(0, 0, 0, 0.75);
+    display: none;
+}
+
+.cart-modal-overlay.active {
+    display: block;
 }
 
 .cart-modal-content {
