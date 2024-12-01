@@ -36,9 +36,13 @@ const changeQuantity = (changeType, event, productId, cartModal = false) =>
     {
         case ("add"):
             updatedQuantity = Math.min(currentQuantity + 1, maxQuantity);
+            syncQuantityInputValue(updatedQuantity, productId);
+
             break;
         case ("subtract"):
             updatedQuantity = currentQuantity - 1;
+            syncQuantityInputValue(updatedQuantity, productId);
+
 
             if (updatedQuantity === 0 && cartModal == false)
             {
@@ -53,13 +57,12 @@ const changeQuantity = (changeType, event, productId, cartModal = false) =>
             break;
     }
 
-    syncQuantityInputValue(updatedQuantity, productId);
-
 
 
     //change the quantity in local storage for the product being updated
     updateQuantityLocalStorage(productId, updatedQuantity);
 
+    GetAndDisplayCartTotalPrice();
 }
 
 //updates quantity for cart item in product list and in cart modal
@@ -115,9 +118,7 @@ const addButtonClicked = event =>
     changeCartItemTotal("add");
     addCartItemToLocalStorageCart(shopItemContent, productId);
     addQuantityButtonsFunctionality(shopItemContent, productId);
-    //update price total 
-    const totalPrice = getCartTotal();
-    displayCartTotal(totalPrice);
+    GetAndDisplayCartTotalPrice();
 
 }
 
@@ -208,7 +209,13 @@ const toggleModal = () =>
 //initialises cart to an empty array on page load if cart array doesn't already exist
 const initialiseCart = () =>
 {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cart = JSON.parse(localStorage.getItem("cart"));
+
+    //if cart doesn't already exist in local storage
+    if (!cart)
+    {
+        localStorage.setItem("cart", JSON.stringify([]));
+    }
 
     if (cart.length !== 0)
     {
@@ -238,8 +245,7 @@ const initialiseCart = () =>
             }
         });
 
-        const totalPrice = getCartTotal();
-        displayCartTotal(totalPrice);
+        GetAndDisplayCartTotalPrice();
 
         fetchCartItemCount();
     }
@@ -391,3 +397,9 @@ const fetchCartItemCount = () =>
     const cartCount = cart.length;
     displayCartItemCountDOM(cartCount);
 }
+function GetAndDisplayCartTotalPrice()
+{
+    const totalPrice = getCartTotal();
+    displayCartTotal(totalPrice);
+}
+
