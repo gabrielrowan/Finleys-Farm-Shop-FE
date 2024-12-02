@@ -212,16 +212,6 @@ body {
 }
 
 
-
-.material-symbols-outlined {
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 600,
-        'GRAD' 0,
-        'opsz' 30
-}
-
-
 .banner-img {
     background-image: url(/Img/farm.jpg);
     background-size: cover;
@@ -236,7 +226,7 @@ body {
 
 .banner-title {
     color: #ffd984;
-    font-size: 5rem;
+    font-size: clamp(3.4rem, 5vw, 5rem);
     position: absolute;
     left: 50%;
     top: 50%;
