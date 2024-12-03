@@ -88,12 +88,11 @@ body {
     border-end-end-radius: 0px;
     position: fixed;
     block-size: 100%;
-    padding: 0px;
     display: grid;
     grid-template-rows: min-content 1fr min-content;
     background-color: #f6edd9;
-    inline-size: 360px;
-    inset-inline-end: 0px;
+    width: 360px;
+    right: 0px;
     padding: 0.5rem;
 }
 
