@@ -297,3 +297,11 @@ input[type=number] {
     object-fit: cover;
     border-radius: 1.25rem 1.25rem 0 0;
 }
+
+@media (max-width: 600px) {
+    .cart-modal-content {
+        width: 100%;
+        border-radius: 0;
+
+    }
+}
