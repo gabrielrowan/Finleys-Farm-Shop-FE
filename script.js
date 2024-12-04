@@ -51,6 +51,8 @@ const changeQuantity = (changeType, event, productId) =>
                 changeCartItemTotal("subtract");
                 removeCartItemFromLocalStorage(productId);
                 removeCartItemFromModalDOM(productId);
+
+
             }
 
 
@@ -357,7 +359,10 @@ const removeCartItemFromModalDOM = (productId) =>
 {
     const cartItemList = document.querySelector(".cart-item-list");
     const matchingModalCartItem = cartItemList.querySelector(`[data-id="${productId}"]`);
-    matchingModalCartItem.remove();
+    if (matchingModalCartItem)
+    {
+        matchingModalCartItem.remove();
+    }
 
 }
 
@@ -414,10 +419,11 @@ const displayEmptyTrolleyMessage = () =>
 
 const removeEmptyTrolleyMessage = () =>
 {
-    const trolleyEmptyContainer = document.querySelector(".trolley-empty-container");
-    if (trolleyEmptyContainer)
+    const modalContent = document.querySelector(".cart-item-list");
+    const emptyTrolleyContainer = modalContent.querySelector(".trolley-empty-container");
+    if (emptyTrolleyContainer)
     {
-        trolleyEmptyContainer.remove();
+        emptyTrolleyContainer.remove();
     }
 
 }
