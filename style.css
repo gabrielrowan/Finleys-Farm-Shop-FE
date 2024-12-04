@@ -9,9 +9,11 @@
 }
 
 :root {
-    --color-green: #97A88B;
-    --color-white: #FFF;
-    --color-light-grey: #eee;
+    --colour-green: #97A88B;
+    --colour-white: #FFF;
+    --colour-light-grey: #eee;
+    --colour-light-beige: #fefae6;
+    --colour-darker-grey: #e2e8ed;
 }
 
 body {
@@ -19,7 +21,7 @@ body {
 }
 
 .navbar {
-    background-color: var(--color-green);
+    background-color: var(--colour-green);
     position: fixed;
     top: 0;
     left: 0;
@@ -96,10 +98,9 @@ body {
     block-size: 100%;
     display: grid;
     grid-template-rows: min-content 1fr min-content;
-    background-color: var(--color-white);
+    background-color: var(--colour-white);
     width: 360px;
     right: 0px;
-    padding: 0.5rem;
 }
 
 .cart-header-title {
@@ -109,11 +110,16 @@ body {
 .cart-header {
     display: grid;
     grid-template-columns: 1fr min-content;
-    margin-bottom: 1rem;
+    margin-bottom: 0.3rem;
+    padding: 0.3rem;
+
 }
 
 .cart-item-list {
     overflow: auto;
+    padding: 0.3rem 0.45rem 0.3rem 0.3rem;
+    background-color: var(--color-light-grey);
+
 }
 
 .cart-item {
@@ -123,11 +129,11 @@ body {
     grid-template-columns: min-content 1fr 1fr;
     grid-template-rows: 2.5rem 3.5rem;
     height: min-content;
-    background-color: var(--white);
+    background-color: var(--colour-white);
     border-radius: 0.5rem;
     gap: 0.4rem;
     align-items: center;
-    border: 0.5px solid var(--color-light-grey);
+    border: 1px solid var(--colour-darker-grey);
     padding-right: 0.4rem;
     margin-bottom: 0.5rem;
     overflow: hidden;
@@ -156,7 +162,7 @@ body {
 }
 
 .checkout-button {
-    background-color: var(--color-green);
+    background-color: var(--colour-green);
     border: none;
     padding: 0.5rem;
 }
@@ -171,7 +177,13 @@ body {
     padding: 1rem 0;
 }
 
-.cart-footer-section {
+.cart-footer {
+    box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 25%);
+    z-index: 1;
+    padding: 0.3rem 0.5rem 0.5rem 0.3rem;
+}
+
+.cart-checkout-section {
     display: flex;
     justify-content: flex-end;
 }
@@ -179,7 +191,7 @@ body {
 .add-to-cart {
     width: 100%;
     font-size: 1rem;
-    background: var(--color-green);
+    background: var(--colour-green);
     border: none;
     margin: 1rem 0;
     height: 2.4rem;
@@ -194,7 +206,7 @@ body {
 
 
 .button-cart-quantity {
-    background-color: #a2af9f;
+    background-color: var(--colour-green);
     border: none;
     font-size: 1.5rem;
     width: 25%;
@@ -208,7 +220,7 @@ body {
     width: 50%;
     background-color: white;
     color: black;
-    border: 1px solid var(--color-light-grey);
+    border: 1px solid var(--colour-light-grey);
 }
 
 
@@ -225,7 +237,7 @@ body {
 }
 
 .banner-title {
-    color: #ffd984;
+    color: var(--colour-light-beige);
     font-size: clamp(3.8rem, 5vw, 5.6rem);
     position: absolute;
     left: 50%;
@@ -253,12 +265,13 @@ body {
     display: grid;
     gap: 0.6rem;
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    margin-bottom: 5rem;
 }
 
 .shop-item {
     aspect-ratio: 1/ 1.5;
-    border-radius: 1rem;
-    border: 1px solid var(--color-light-grey);
+    border: 1px solid var(--colour-darker-grey);
+
 }
 
 
@@ -266,7 +279,7 @@ body {
     font-size: 1.25rem;
     line-height: 1.1;
     height: 10rem;
-    background: var(--color-white);
+    background: var(--colour-white);
     align-self: end;
     padding: 0.75rem;
 }
