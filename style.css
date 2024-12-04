@@ -246,10 +246,17 @@ body {
     text-align: center;
 }
 
-.container {
+.shop-items-container {
     max-width: 60rem;
     margin-inline: auto;
     padding-inline: 2rem;
+}
+
+.shop-items {
+    display: grid;
+    gap: 0.6rem;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    margin-bottom: 5rem;
 }
 
 .stacked {
@@ -261,15 +268,9 @@ body {
     grid-row: 1 / 2;
 }
 
-.shop-items {
-    display: grid;
-    gap: 0.6rem;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    margin-bottom: 5rem;
-}
 
 .shop-item {
-    aspect-ratio: 1/ 1.5;
+    aspect-ratio: 1 / 1.5;
     border: 1px solid var(--colour-darker-grey);
 
 }
@@ -306,7 +307,7 @@ input[type=number] {
 
 .shop-item-img {
     width: 100%;
-    aspect-ratio: 1 / 1.25;
+    aspect-ratio: 1.2 / 1;
     object-fit: cover;
 }
 

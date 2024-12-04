@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function ()
 {
     addAddButtonFunctionality();
     addModalEventListeners();
-    initialiseCart();
+    loadCartState();
 
 });
 
@@ -29,7 +29,7 @@ const changeQuantity = (changeType, event, productId) =>
     const matchingCartItem = containerElement.querySelector(`[data-id="${productId}"]`);
     const quantityInput = matchingCartItem.querySelector(".input-cart-quantity");
     const currentQuantity = parseInt(quantityInput.value);
-    const maxQuantity = 15;
+    const maxQuantity = 50;
     let updatedQuantity = 0;
 
     switch (changeType)
@@ -109,7 +109,7 @@ const addQuantityButtonsFunctionality = (parentElement, productId) =>
 // Increases cart count by 1
 // Adds functionality to quantity buttons so that they can increase and decrease by 1
 // Adds cart item to local storage
-// Update total price
+// Updates and displays total price
 const addButtonClicked = event =>
 {
     const shopItemContent = event.target.parentElement;
@@ -205,11 +205,12 @@ const toggleModal = () =>
 };
 
 //initialises cart to an empty array on page load if cart array doesn't already exist
-const initialiseCart = () =>
+//loops over all products in cart and updates products in DOM to reflect that they have been added to the trolley
+const loadCartState = () =>
 {
     const cart = JSON.parse(localStorage.getItem("cart"));
 
-    //if cart doesn't already exist in local storage
+    //if cart doesn't already exist in local storage, set to empty array
     if (!cart)
     {
         localStorage.setItem("cart", JSON.stringify([]));
@@ -220,6 +221,9 @@ const initialiseCart = () =>
         cart.forEach(product =>
         {
             const shopItem = document.querySelector(`.shop-item[data-id="${product.id}"]`);
+
+            //If a DOM item is found that matches a product added to local storage, then the product has already been added to the cart
+            //This means that, instead of an add button, the quantity input controls need to show instead in the product list
             if (shopItem)
             {
                 const shopItemContent = shopItem.querySelector(".shop-item-content");
@@ -249,19 +253,18 @@ const initialiseCart = () =>
 
     fetchCartItemCount();
 
-
 }
 
-//adds cart item to local storage
+// adds cart item to local storage
 // adds cart item to DOM
 const addCartItemToLocalStorageCart = (shopItemContent, productId) =>
 {
-    const product = {};
     const productName = shopItemContent.querySelector('.shop-item-title').textContent;
     const productPrice = shopItemContent.querySelector('.shop-item-price').textContent;
     const productQuantity = shopItemContent.querySelector('.input-cart-quantity').value;
     const productImg = shopItemContent.parentElement.querySelector(".shop-item-img").src;
 
+    const product = {};
     product.id = productId;
     product.name = productName;
     product.price = productPrice;
@@ -276,9 +279,7 @@ const addCartItemToLocalStorageCart = (shopItemContent, productId) =>
         cart.push(product);
         localStorage.setItem("cart", JSON.stringify(cart));
         addCartItemToModalDOM(product);
-
     }
-
 
 }
 
@@ -326,13 +327,13 @@ const addCartItemToModalDOM = (product) =>
         <div class="cart-item-quantity"></div>
     `;
 
-    // Append the new cart item to the list
+    // Append the new cart item to the list of cart items in the modal
     cartitemList.appendChild(cartItem);
 
-    const lastCartItemQuantity = cartItem.querySelector(".cart-item-quantity");
-    addCartItemInput(lastCartItemQuantity, product.quantity);
+    const cartItemQuantity = cartItem.querySelector(".cart-item-quantity");
+    addCartItemInput(cartItemQuantity, product.quantity);
 
-    addQuantityButtonsFunctionality(cartItem, product.id, true);
+    addQuantityButtonsFunctionality(cartItem, product.id);
 
 }
 
