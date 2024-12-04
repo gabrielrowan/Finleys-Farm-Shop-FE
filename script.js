@@ -140,8 +140,8 @@ const changeCartItemTotal = changeType =>
             updatedCartCount = currentCartCount - 1;
     }
 
+    toggleEmptyTrolleyMessage(updatedCartCount);
     displayCartItemCountDOM(updatedCartCount);
-
 
 }
 
@@ -243,8 +243,10 @@ const initialiseCart = () =>
 
         GetAndDisplayCartTotalPrice();
 
-        fetchCartItemCount();
     }
+
+    fetchCartItemCount();
+
 
 }
 
@@ -392,6 +394,7 @@ const fetchCartItemCount = () =>
     const cart = JSON.parse(localStorage.getItem("cart"));
     const cartCount = cart.length;
     displayCartItemCountDOM(cartCount);
+    toggleEmptyTrolleyMessage(cartCount);
 }
 
 const GetAndDisplayCartTotalPrice = () =>
@@ -400,3 +403,34 @@ const GetAndDisplayCartTotalPrice = () =>
     displayCartTotal(totalPrice);
 }
 
+const displayEmptyTrolleyMessage = () =>
+{
+    const modalContent = document.querySelector(".cart-item-list");
+    modalContent.innerHTML =
+        `<div class="trolley-empty-container">
+            <p class="trolley-empty-text">Your trolley is empty </p>
+        </div>`;
+}
+
+const removeEmptyTrolleyMessage = () =>
+{
+    const trolleyEmptyContainer = document.querySelector(".trolley-empty-container");
+    if (trolleyEmptyContainer)
+    {
+        trolleyEmptyContainer.remove();
+    }
+
+}
+
+const toggleEmptyTrolleyMessage = (cartCount) =>
+{
+    if (cartCount === 0)
+    {
+        displayEmptyTrolleyMessage();
+    }
+
+    else
+    {
+        removeEmptyTrolleyMessage();
+    }
+}
