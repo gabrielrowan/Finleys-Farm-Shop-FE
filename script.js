@@ -190,7 +190,16 @@ const addModalEventListeners = () =>
 const toggleModal = () =>
 {
     const modal = document.querySelector(".cart-modal-overlay");
+    const body = document.body;
     modal.classList.toggle("active");
+
+    if (modal.classList.contains("active"))
+    {
+        body.style.overflow = "hidden";
+    } else
+    {
+        body.style.overflow = "auto";
+    }
 };
 
 //initialises cart to an empty array on page load if cart array doesn't already exist
