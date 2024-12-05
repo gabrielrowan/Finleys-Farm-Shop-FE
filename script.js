@@ -1,5 +1,3 @@
-
-
 // Checks if DOM is ready before executing javascript referencing DOM elements
 document.addEventListener("DOMContentLoaded", function ()
 {
@@ -8,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function ()
     loadCartState();
 
 });
-
 
 
 // Adds on click functionality to add Buttons
@@ -22,8 +19,8 @@ const addAddButtonFunctionality = () =>
     }
 }
 
-// Increase quantity of cart item
-const changeQuantity = (changeType, event, productId) =>
+// Change quantity of cart item - changeType can be "add" or "subtract"
+const changeQuantity = (changeType, productId) =>
 {
     const containerElement = document.querySelector(`.shop-items`);
     const matchingCartItem = containerElement.querySelector(`[data-id="${productId}"]`);
@@ -37,47 +34,46 @@ const changeQuantity = (changeType, event, productId) =>
         case ("add"):
             updatedQuantity = Math.min(currentQuantity + 1, maxQuantity);
             syncQuantityInputValue(updatedQuantity, productId);
-
             break;
+
         case ("subtract"):
             updatedQuantity = currentQuantity - 1;
-            syncQuantityInputValue(updatedQuantity, productId);
-
-
-            if (updatedQuantity === 0)
-            {
-
-                ReturnToCartAddButton(matchingCartItem);
-                changeCartItemTotal("subtract");
-                removeCartItemFromLocalStorage(productId);
-                removeCartItemFromModalDOM(productId);
-
-
-            }
-
-
             break;
     }
 
+    syncQuantityInputValue(updatedQuantity, productId);
 
+    if (updatedQuantity === 0)
+    {
+        //when quantity of cart item is 0, item is removed from modal DOM and local storage
+        //the quantity plus and minus buttons revert back to the add button
+        returnToCartAddButton(matchingCartItem);
+        changeCartItemTotal("subtract");
+        removeCartItemFromLocalStorage(productId);
+        removeCartItemFromModalDOM(productId);
 
-    //change the quantity in local storage for the product being updated
-    updateQuantityLocalStorage(productId, updatedQuantity);
+    }
+    else
+    {
+        //only update quantity if item has not been removed from cart
+        updateQuantityLocalStorage(productId, updatedQuantity);
+    }
 
-    GetAndDisplayCartTotalPrice();
+    getAndDisplayCartTotalPrice();
 }
 
-//updates quantity for cart item in product list and in cart modal
+//ensures that the quantity displayed for the same cart item in both places (product list and modal) is the same
 const syncQuantityInputValue = (updatedQuantity, productId) =>
 {
     const cartItemListModalClassName = "cart-item-list";
     const cartItemProductList = "shop-items";
-    UpdateQuantityInputValue(cartItemListModalClassName, productId, updatedQuantity);
-    UpdateQuantityInputValue(cartItemProductList, productId, updatedQuantity);
+    updateQuantityInputValue(cartItemListModalClassName, productId, updatedQuantity);
+    updateQuantityInputValue(cartItemProductList, productId, updatedQuantity);
 
 }
 
-const UpdateQuantityInputValue = (containerElementClassName, productId, updatedQuantity) =>
+//updates quantity for cart item in product list and in cart modal
+const updateQuantityInputValue = (containerElementClassName, productId, updatedQuantity) =>
 {
     const containerElement = document.querySelector(`.${containerElementClassName}`);
     const matchingCartItem = containerElement.querySelector(`[data-id="${productId}"]`);
@@ -85,8 +81,8 @@ const UpdateQuantityInputValue = (containerElementClassName, productId, updatedQ
     modalCartItemInputElement.value = updatedQuantity;
 }
 
-
-const ReturnToCartAddButton = (parentElement) =>
+//Makes add button for cart item visible
+const returnToCartAddButton = (parentElement) =>
 {
     parentElement.querySelector(".cart-items-control").remove();
     const addButton = parentElement.querySelector(".add-to-cart");
@@ -98,9 +94,9 @@ const ReturnToCartAddButton = (parentElement) =>
 const addQuantityButtonsFunctionality = (parentElement, productId) =>
 {
     const increaseQuantityButton = parentElement.querySelector(".increase-quantity");
-    increaseQuantityButton.addEventListener("click", (event) => changeQuantity("add", event, productId));
+    increaseQuantityButton.addEventListener("click", () => changeQuantity("add", productId));
     const decreaseQuantityButton = parentElement.querySelector(".decrease-quantity");
-    decreaseQuantityButton.addEventListener("click", (event) => changeQuantity("subtract", event, productId));
+    decreaseQuantityButton.addEventListener("click", () => changeQuantity("subtract", productId));
 
 }
 
@@ -120,7 +116,7 @@ const addButtonClicked = event =>
     changeCartItemTotal("add");
     addCartItemToLocalStorageCart(shopItemContent, productId);
     addQuantityButtonsFunctionality(shopItemContent, productId);
-    GetAndDisplayCartTotalPrice();
+    getAndDisplayCartTotalPrice();
 
 }
 
@@ -130,7 +126,6 @@ const changeCartItemTotal = changeType =>
 {
     const cart = JSON.parse(localStorage.getItem("cart"));
     let currentCartCount = cart.length;
-
     let updatedCartCount = 0;
 
     switch (changeType)
@@ -247,7 +242,7 @@ const loadCartState = () =>
             }
         });
 
-        GetAndDisplayCartTotalPrice();
+        getAndDisplayCartTotalPrice();
 
     }
 
@@ -312,6 +307,7 @@ const removeCartItemFromLocalStorage = (productId) =>
 
 }
 
+//adds the HTML needed for a cart item to the modal
 const addCartItemToModalDOM = (product) =>
 {
     const cartitemList = document.querySelector(".cart-item-list");
@@ -337,6 +333,7 @@ const addCartItemToModalDOM = (product) =>
 
 }
 
+//gets cart total price from local storage
 const getCartTotal = () =>
 {
     const cart = JSON.parse(localStorage.getItem("cart"));
@@ -350,12 +347,14 @@ const getCartTotal = () =>
     return total;
 }
 
+//displays cart total price to 2 decimal places with '£' sign
 const displayCartTotal = (sum) =>
 {
     const cartTotalElement = document.querySelector(".cart-subtotal");
     cartTotalElement.innerText = `£${sum.toFixed(2)}`;
 }
 
+//removes cart item from modal
 const removeCartItemFromModalDOM = (productId) =>
 {
     const cartItemList = document.querySelector(".cart-item-list");
@@ -377,7 +376,6 @@ const displayCartItemCountDOM = (cartCount) =>
 
     cartCountElement.innerText = cartCount;
 
-
     if (cartCount === 1)
     {
         modalCartCountElement.innerText = `Trolley (${cartCount} item)`;
@@ -388,13 +386,14 @@ const displayCartItemCountDOM = (cartCount) =>
         modalCartCountElement.innerText = `Trolley (${cartCount} items)`;
 
     }
-
     else
     {
         modalCartCountElement.innerText = `Trolley (0 items)`;
     }
 }
 
+//fetches the amount of items in cart
+//displays cart item count and, if cart count is 0, empty trolley message
 const fetchCartItemCount = () =>
 {
     const cart = JSON.parse(localStorage.getItem("cart"));
@@ -403,12 +402,14 @@ const fetchCartItemCount = () =>
     toggleEmptyTrolleyMessage(cartCount);
 }
 
-const GetAndDisplayCartTotalPrice = () =>
+//gets and displays price of total items in cart
+const getAndDisplayCartTotalPrice = () =>
 {
     const totalPrice = getCartTotal();
     displayCartTotal(totalPrice);
 }
 
+//displays empty trolley message in modal
 const displayEmptyTrolleyMessage = () =>
 {
     const modalContent = document.querySelector(".cart-item-list");
@@ -418,6 +419,7 @@ const displayEmptyTrolleyMessage = () =>
         </div>`;
 }
 
+//removes empty trolley message from modal
 const removeEmptyTrolleyMessage = () =>
 {
     const modalContent = document.querySelector(".cart-item-list");
@@ -429,6 +431,7 @@ const removeEmptyTrolleyMessage = () =>
 
 }
 
+//Shows empty trolley message when cart count is 0
 const toggleEmptyTrolleyMessage = (cartCount) =>
 {
     if (cartCount === 0)
