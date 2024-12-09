@@ -17,7 +17,7 @@
 }
 
 body {
-    background: var(--colour-light-beige);
+    background-color: var(--colour-light-beige);
 }
 
 .navbar {
@@ -191,7 +191,7 @@ body {
 .add-to-cart {
     width: 100%;
     font-size: 1rem;
-    background: var(--colour-green);
+    background-color: var(--colour-green);
     border: none;
     margin: 1rem 0;
     height: 2.4rem;
@@ -259,11 +259,8 @@ body {
     margin-bottom: 5rem;
 }
 
-.stacked {
-    display: grid;
-}
 
-.stacked>* {
+.shop-item>* {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
 }
@@ -272,6 +269,7 @@ body {
 .shop-item {
     aspect-ratio: 1 / 1.5;
     border: 1px solid var(--colour-darker-grey);
+    display: grid;
 
 }
 
@@ -280,7 +278,7 @@ body {
     font-size: 1.25rem;
     line-height: 1.1;
     height: 10rem;
-    background: var(--colour-white);
+    background-color: var(--colour-white);
     align-self: end;
     padding: 0.75rem;
 }
