@@ -55,4 +55,4 @@ Desktop shopping cart open view:
 ## Final Words 
 
 - Author: Gabriel Rowan  :smiley_cat:
-- Copyright © 2024
+- Project finished December 2024
