@@ -267,7 +267,7 @@ body {
 
 
 .shop-item {
-    aspect-ratio: 1 / 1.5;
+    aspect-ratio: 1 / 1.45;
     border: 1px solid var(--colour-darker-grey);
     display: grid;
 
@@ -309,10 +309,20 @@ input[type=number] {
     object-fit: cover;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 660px) {
+    .shop-item {
+        aspect-ratio: 1 / 1.4;
+    }
+}
+
+@media (max-width: 500px) {
     .cart-modal-content {
         width: 100%;
         border-radius: 0;
 
+    }
+
+    .shop-item {
+        aspect-ratio: 1/ 1.25
     }
 }
