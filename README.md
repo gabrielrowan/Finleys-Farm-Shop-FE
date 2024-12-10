@@ -16,7 +16,9 @@ This is a front end project using:
 
 ## About this project 
 
-This is a shopping cart web app for a mock local farm shop. It uses **local storage** which means that items added to the cart will stay in the cart even when: 
+This is a shopping cart web app for a mock local farm shop :tomato:
+
+It uses **local storage** which means that items added to the cart will stay in the cart even when: 
 - the page is refreshed
 - the tab is closed and another tab is opened
 
