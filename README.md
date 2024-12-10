@@ -1,5 +1,9 @@
 # Finley's Farm Shop
 
+## Deployment
+
+The have a click around, the live link for this project is: [https://gabrielrowan.github.io/Finleys-Farm-Shop-FE/](https://gabrielrowan.github.io/Finleys-Farm-Shop-FE/)
+
 ## Technologies
 
 This is a front end project using:
