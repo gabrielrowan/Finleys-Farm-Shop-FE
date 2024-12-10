@@ -225,7 +225,7 @@ body {
 
 
 .banner-img {
-    background-image: url(/Img/farm.jpg);
+    background-image: url("Img/farm.jpg");
     background-size: cover;
     width: 100%;
     height: 400px;
