@@ -34,7 +34,10 @@ This app protects from:
 
 This is a fully responsive web app adaptable to mobile, ipad and desktop. 
 
-Mobile: 
+### Mobile: 
+
+Item being added to the cart in mobile view:
+
 ![3 screenshots from mobile view](https://github.com/user-attachments/assets/f50e177b-001e-4d24-9c63-b6b10c7f170f)
 
 
