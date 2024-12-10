@@ -2,7 +2,7 @@
 
 ## Deployment
 
-The have a click around, the live link for this project is: [https://gabrielrowan.github.io/Finleys-Farm-Shop-FE/](https://gabrielrowan.github.io/Finleys-Farm-Shop-FE/)
+To have a click around, the live link for this project is: [https://gabrielrowan.github.io/Finleys-Farm-Shop-FE/](https://gabrielrowan.github.io/Finleys-Farm-Shop-FE/)
 
 ## Technologies
 
