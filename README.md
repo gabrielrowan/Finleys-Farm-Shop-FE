@@ -16,7 +16,7 @@ This is a front end project using:
 
 ## About this project 
 
-This is a shopping cart web app. It uses **local storage** which means that items added to the cart will stay in the cart even when: 
+This is a shopping cart web app for a mock local farm shop. It uses **local storage** which means that items added to the cart will stay in the cart even when: 
 - the page is refreshed
 - the tab is closed and another tab is opened
 
@@ -52,4 +52,7 @@ Desktop shopping cart open view:
 ![desktop-shopping-cart-view](https://github.com/user-attachments/assets/f7a70c92-67e0-426e-8cbc-e2ff1bb43874)
 
 
+## Final Words 
 
+- Author: Gabriel Rowan  :smiley_cat:
+- Copyright © 2024
