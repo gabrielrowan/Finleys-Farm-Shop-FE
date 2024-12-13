@@ -12,7 +12,7 @@ This is a front end project using:
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
-![Ipad Landscape Screenshot](https://github.com/user-attachments/assets/e966f716-fb31-4059-aa71-7bc50e3afe9b)
+![screenshot of project - desktop view](https://github.com/user-attachments/assets/c2bb16f3-097e-43e3-b096-5ec0db80fe34)
 
 ## About this project 
 
@@ -44,14 +44,14 @@ This is a fully responsive web app adaptable to mobile, ipad and desktop.
 
 Item being added to the cart in mobile view:
 
-![3 screenshots from mobile view](https://github.com/user-attachments/assets/f50e177b-001e-4d24-9c63-b6b10c7f170f)
+![radishes being added to the cart - mobile view ](https://github.com/user-attachments/assets/ce36db74-08e5-4ad2-b8a7-94b7b57b290b)
 
 
 ### Desktop 
 
 Desktop shopping cart open view: 
 
-![desktop-shopping-cart-view](https://github.com/user-attachments/assets/f7a70c92-67e0-426e-8cbc-e2ff1bb43874)
+![trolley modal open - desktop view](https://github.com/user-attachments/assets/af5bb155-7e9d-4704-908e-04fb395ac980)
 
 
 ## Final Words 
