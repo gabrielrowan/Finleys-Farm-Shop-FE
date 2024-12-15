@@ -204,51 +204,48 @@ const toggleModal = () =>
 const loadCartState = () =>
 {
     const cart = JSON.parse(localStorage.getItem("cart"));
-
-    //if cart doesn't already exist in local storage, set to empty array
     if (!cart)
     {
-        localStorage.setItem("cart", JSON.stringify([]));
+        cart = [];
+        localStorage.setItem("cart", JSON.stringify(cart));
     }
 
-    if (cart.length !== 0)
+    cart.forEach(product =>
     {
-        cart.forEach(product =>
+        const shopItem = document.querySelector(`.shop-item[data-id="${product.id}"]`);
+
+        //If a DOM item is found that matches a product added to local storage, then the product has already been added to the cart
+        //This means that, instead of an add button, the quantity input controls need to show instead in the product list
+        if (shopItem)
         {
-            const shopItem = document.querySelector(`.shop-item[data-id="${product.id}"]`);
+            const shopItemContent = shopItem.querySelector(".shop-item-content");
+            const addButton = shopItemContent.querySelector(".add-to-cart");
 
-            //If a DOM item is found that matches a product added to local storage, then the product has already been added to the cart
-            //This means that, instead of an add button, the quantity input controls need to show instead in the product list
-            if (shopItem)
-            {
-                const shopItemContent = shopItem.querySelector(".shop-item-content");
-                const addButton = shopItemContent.querySelector(".add-to-cart");
+            // Hide "Add" button
+            addButton.style.display = "none";
 
-                // Hide "Add" button
-                addButton.style.display = "none";
+            // Add input controls
+            addCartItemInput(shopItemContent, product.quantity);
 
-                // Add input controls
-                addCartItemInput(shopItemContent, product.quantity);
+            // Update quantity from localStorage
+            const quantityInput = shopItemContent.querySelector(".input-cart-quantity");
+            quantityInput.value = product.quantity;
 
-                // Update quantity from localStorage
-                const quantityInput = shopItemContent.querySelector(".input-cart-quantity");
-                quantityInput.value = product.quantity;
+            // Add functionality to increase/decrease buttons
+            addQuantityButtonsFunctionality(shopItemContent, product.id);
 
-                // Add functionality to increase/decrease buttons
-                addQuantityButtonsFunctionality(shopItemContent, product.id);
+            //add cart item to the DOM
+            addCartItemToModalDOM(product);
+        }
+    });
 
-                //add cart item to the DOM
-                addCartItemToModalDOM(product);
-            }
-        });
-
-        getAndDisplayCartTotalPrice();
-
-    }
-
+    getAndDisplayCartTotalPrice();
     fetchCartItemCount();
 
 }
+
+
+
 
 // adds cart item to local storage
 // adds cart item to DOM
