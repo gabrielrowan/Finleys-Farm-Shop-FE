@@ -203,7 +203,7 @@ const toggleModal = () =>
 //loops over all products in cart and updates products in DOM to reflect that they have been added to the trolley
 const loadCartState = () =>
 {
-    const cart = JSON.parse(localStorage.getItem("cart"));
+    let cart = JSON.parse(localStorage.getItem("cart"));
     if (!cart)
     {
         cart = [];
