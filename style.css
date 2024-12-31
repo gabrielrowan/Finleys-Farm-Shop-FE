@@ -306,6 +306,13 @@ input[type=number] {
     width: 100%;
     aspect-ratio: 1.2 / 1;
     object-fit: cover;
+    height: auto;
+}
+
+.shop-item-img::after {
+    content: "";
+    display: block;
+    padding-top: calc(100% / 1.2);
 }
 
 @media (max-width: 660px) {
