@@ -306,7 +306,6 @@ input[type=number] {
     width: 100%;
     aspect-ratio: 1.2 / 1;
     object-fit: cover;
-    height: auto;
 }
 
 
