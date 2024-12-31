@@ -260,12 +260,6 @@ body {
 }
 
 
-.shop-item>* {
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
-}
-
-
 .shop-item {
     aspect-ratio: 1 / 1.45;
     border: 1px solid var(--colour-darker-grey);
