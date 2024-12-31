@@ -309,11 +309,6 @@ input[type=number] {
     height: auto;
 }
 
-.shop-item-img::after {
-    content: "";
-    display: block;
-    padding-top: calc(100% / 1.2);
-}
 
 @media (max-width: 660px) {
     .shop-item {
