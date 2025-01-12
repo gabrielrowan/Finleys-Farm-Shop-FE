@@ -207,12 +207,13 @@ body {
 
 
 .button-cart-quantity {
+    appearance: none;
     background-color: var(--colour-green);
     border: none;
     font-size: 1.5rem;
     width: 25%;
     height: 2.4rem;
-    color: black;
+    color: black !important;
 }
 
 .input-cart-quantity {
