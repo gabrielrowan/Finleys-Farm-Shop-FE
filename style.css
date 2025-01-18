@@ -10,13 +10,14 @@
 
 :root {
     --colour-green: #97A88B;
-    --colour-darker-green: #6F8063;
+    --colour-darker-green: #67755d;
     --colour-white: #FFF;
     --colour-light-grey: #eee;
     --colour-light-beige: #fefae6;
     --colour-darker-grey: #e2e8ed;
     --colour-dark-brown: #1d0200;
     --colour-darker-brown: #23120B;
+    --colour-mud-green: #2c2a1c;
 }
 
 body {
@@ -242,7 +243,7 @@ body {
 }
 
 .banner-title {
-    color: var(--colour-darker-brown);
+    color: var(--colour-mud-green);
     font-size: clamp(3.8rem, 5vw, 5.6rem);
     position: absolute;
     left: 50%;
@@ -429,10 +430,15 @@ input[type=number] {
     font-size: 1rem;
     cursor: pointer;
     width: 100%;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: var(--colour-mud-green);
 }
 
 .footer-copyright {
-    background-color: #2c2a1c;
+    background-color: var(--colour-mud-green);
     color: white;
     padding: 1.5rem;
 }
