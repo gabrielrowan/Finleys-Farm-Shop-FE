@@ -308,9 +308,9 @@ input[type=number] {
 
 
 .about-container {
-    max-width: 60rem;
+    max-width: 56rem;
     margin-inline: auto;
-    padding-inline: 2rem;
+    padding-inline: 1rem;
 }
 
 
@@ -325,7 +325,7 @@ input[type=number] {
     font-family: 'Reenie Beanie', handwriting;
     margin-bottom: 1rem;
     font-size: 2.5rem;
-    color: orange;
+    color: #ea9944;
 }
 
 .about-text {
@@ -335,10 +335,13 @@ input[type=number] {
 
 .about-photo-old-farm {
     margin-bottom: 2rem;
+    width: 95%;
 }
 
-.about-photo-lambs {
-    height: 450px;
+.about-photo-lambs,
+.about-photo-cabbages {
+    object-fit: contain;
+    width: 95%;
     margin-bottom: 4rem;
 }
 
