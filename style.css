@@ -347,6 +347,57 @@ input[type=number] {
     margin-bottom: 4rem;
 }
 
+.contact-container {
+    max-width: 56rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+    margin-bottom: 3rem;
+}
+
+.opening-hours-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.contact-form {
+    background-color: #E0E0E0;
+    padding: 1rem;
+    border-radius: 4px;
+
+}
+
+.contact-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--colour-dark-brown);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.submit-button {
+    background-color: var(--colour-green);
+    color: var(--colour-dark-brown);
+    border: none;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+}
+
 .footer-copyright {
     background-color: #2c2a1c;
     color: white;
