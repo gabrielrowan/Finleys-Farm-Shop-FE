@@ -24,7 +24,7 @@ body {
     background-color: var(--colour-light-beige);
 }
 
-.navbar {
+.navbar-top {
     background-color: var(--colour-darker-green);
     position: fixed;
     top: 0;
@@ -38,7 +38,7 @@ body {
 
 }
 
-.second-nav {
+.navbar-bottom {
     z-index: 1;
     position: fixed;
     background: var(--colour-green);
@@ -46,17 +46,32 @@ body {
     display: flex;
     justify-content: center;
     padding: 0.8rem 0;
+    margin: 1rem 0;
 }
 
-.nav-list {
+.navbar-bottom .nav-links {
     display: flex;
     list-style: none;
     letter-spacing: 0.1rem;
 }
 
-.nav-list li {
-    padding: 0 0.65rem;
+.nav-links li {
+    padding: 0 0.9rem;
     font-size: 1.1rem;
+}
+
+.nav-links a {
+    color: var(--colour-dark-brown);
+    text-decoration: none;
+    cursor: default;
+
+}
+
+
+.nav-links li:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--colour-dark-brown);
+    cursor: default;
 }
 
 .site-logo,
