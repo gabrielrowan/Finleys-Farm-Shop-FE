@@ -10,11 +10,13 @@
 
 :root {
     --colour-green: #97A88B;
+    --colour-darker-green: #6F8063;
     --colour-white: #FFF;
     --colour-light-grey: #eee;
     --colour-light-beige: #fefae6;
     --colour-darker-grey: #e2e8ed;
     --colour-dark-brown: #1d0200;
+    --colour-darker-brown: #23120B;
 }
 
 body {
@@ -241,7 +243,7 @@ body {
 }
 
 .banner-title {
-    color: #23120B;
+    color: var(--colour-darker-brown);
     font-size: clamp(3.8rem, 5vw, 5.6rem);
     position: absolute;
     left: 50%;
@@ -354,6 +356,32 @@ input[type=number] {
     margin-bottom: 3rem;
 }
 
+.contact-title {
+    font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
+    font-size: 3.3rem;
+    margin-bottom: 0.6rem;
+    color: var(--colour-dark-brown);
+}
+
+.contact-subtitle {
+    font-family: 'Reenie Beanie', handwriting;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    color: #ea9944;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-bottom: 3rem;
+}
+
+
+
+.contact-sign-post-img {
+    width: 90%;
+}
+
 .opening-hours-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -362,7 +390,7 @@ input[type=number] {
 }
 
 .contact-form {
-    background-color: #E0E0E0;
+    background-color: var(--colour-green);
     padding: 1rem;
     border-radius: 4px;
 
@@ -375,7 +403,14 @@ input[type=number] {
 .contact-form label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--colour-dark-brown);
+    color: black;
+
+}
+
+.contact-hours-location {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin-bottom: 2rem;
 }
 
 .contact-form input,
@@ -388,8 +423,8 @@ input[type=number] {
 }
 
 .submit-button {
-    background-color: var(--colour-green);
-    color: var(--colour-dark-brown);
+    background-color: var(--colour-darker-green);
+    color: white;
     border: none;
     padding: 0.75rem;
     border-radius: 4px;
