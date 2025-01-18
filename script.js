@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function ()
     addAddButtonFunctionality();
     addModalEventListeners();
     loadCartState();
+    setCopyrightYearFooter();
 
 });
 
@@ -441,3 +442,4 @@ const toggleEmptyTrolleyMessage = (cartCount) =>
         removeEmptyTrolleyMessage();
     }
 }
+

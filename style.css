@@ -247,6 +247,7 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
 }
 
 .shop-items-container {
@@ -303,6 +304,48 @@ input[type=number] {
     width: 100%;
     aspect-ratio: 1.2 / 1;
     object-fit: cover;
+}
+
+
+.about-container {
+    max-width: 60rem;
+    margin-inline: auto;
+    padding-inline: 2rem;
+}
+
+
+.about-title {
+    font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
+    font-size: 3.8rem;
+    margin-bottom: 1rem;
+
+}
+
+.about-subtitle {
+    font-family: 'Reenie Beanie', handwriting;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    color: orange;
+}
+
+.about-text {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.about-photo-old-farm {
+    margin-bottom: 2rem;
+}
+
+.about-photo-lambs {
+    height: 450px;
+    margin-bottom: 4rem;
+}
+
+.footer-copyright {
+    background-color: #2c2a1c;
+    color: white;
+    padding: 1.5rem;
 }
 
 
