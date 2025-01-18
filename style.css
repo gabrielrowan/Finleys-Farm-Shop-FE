@@ -14,6 +14,7 @@
     --colour-light-grey: #eee;
     --colour-light-beige: #fefae6;
     --colour-darker-grey: #e2e8ed;
+    --colour-dark-brown: #1d0200;
 }
 
 body {
@@ -228,7 +229,7 @@ body {
 
 
 .banner-img {
-    background-image: url("Img/farm.jpg");
+    background-image: url("Img/field.jpg");
     background-size: cover;
     width: 100%;
     height: 400px;
@@ -240,7 +241,7 @@ body {
 }
 
 .banner-title {
-    color: var(--colour-light-beige);
+    color: #23120B;
     font-size: clamp(3.8rem, 5vw, 5.6rem);
     position: absolute;
     left: 50%;
@@ -318,6 +319,7 @@ input[type=number] {
     font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
     font-size: 3.8rem;
     margin-bottom: 1rem;
+    color: var(--colour-dark-brown);
 
 }
 
