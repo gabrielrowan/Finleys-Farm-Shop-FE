@@ -11,10 +11,10 @@
         href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Reenie+Beanie&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script defer src="about.js"></script>
+    <script defer src="script.js"></script>
 </head>
 
-<body>
+<body id="contact">
     <header>
         <nav class="navbar-top">
             <div class="logo">
@@ -52,6 +52,29 @@
             </div>
         </div>
     </header>
+    <div class="cart-modal-overlay">
+        <div class="cart-modal-content">
+            <div class="cart-header">
+                <h1 class="cart-header-title">Trolley (0 items)</h1>
+                <span class="close-cart-modal"><svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                        viewBox="0 -960 960 960" width="24px" fill="#000">
+                        <path
+                            d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                    </svg></span>
+            </div>
+            <div class="cart-item-list"></div>
+            <div class="cart-footer">
+                <div class="cart-subtotal-section">
+                    <p class="cart-subtotal-title">Subtotal (excl. delivery)</p>
+                    <span class="cart-subtotal">£0.00</span>
+                </div>
+                <div class="cart-checkout-section">
+                    <button class="checkout-button">Go to checkout</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <main>
         <div class="contact-container">
             <h1 class="contact-title">Contact Us</h1>

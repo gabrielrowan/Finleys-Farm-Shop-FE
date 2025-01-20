@@ -1,7 +1,10 @@
 // Checks if DOM is ready before executing javascript referencing DOM elements
 document.addEventListener("DOMContentLoaded", function ()
 {
-    addAddButtonFunctionality();
+    if (document.body.id === "products")
+    {
+        addAddButtonFunctionality();
+    }
     addModalEventListeners();
     loadCartState();
     setCopyrightYearFooter();
@@ -215,6 +218,9 @@ const loadCartState = () =>
     {
         const shopItem = document.querySelector(`.shop-item[data-id="${product.id}"]`);
 
+        //add cart item to the DOM
+        addCartItemToModalDOM(product);
+
         //If a DOM item is found that matches a product added to local storage, then the product has already been added to the cart
         //This means that, instead of an add button, the quantity input controls need to show instead in the product list
         if (shopItem)
@@ -235,8 +241,6 @@ const loadCartState = () =>
             // Add functionality to increase/decrease buttons
             addQuantityButtonsFunctionality(shopItemContent, product.id);
 
-            //add cart item to the DOM
-            addCartItemToModalDOM(product);
         }
     });
 
@@ -443,3 +447,11 @@ const toggleEmptyTrolleyMessage = (cartCount) =>
     }
 }
 
+// set copright year to current year
+const setCopyrightYearFooter = () =>
+{
+    footerElement = document.querySelector('.footer-copyright');
+    thisYear = new Date().getFullYear();
+    footerElement.innerText = `@ Gabriel Rowan ${thisYear}`;
+
+}
