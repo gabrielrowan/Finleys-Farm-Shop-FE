@@ -1,4 +1,8 @@
+
+![finleys-banner](https://github.com/user-attachments/assets/93ccd785-aecf-4fd6-8c90-7bf8bf0fd575)
+
 # Finley's Farm Shop
+
 
 ## Deployment
 
@@ -12,7 +16,6 @@ This is a front end project using:
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
-![screenshot of project - desktop view](https://github.com/user-attachments/assets/c2bb16f3-097e-43e3-b096-5ec0db80fe34)
 
 ## About this project 
 
