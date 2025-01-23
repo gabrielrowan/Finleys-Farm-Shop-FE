@@ -56,7 +56,7 @@ Desktop shopping cart open view:
 
 - [x] My first goal for this project was to create a list of projects that could be added to a shopping cart modal
 - [x] Next, I wanted to create about and contact pages for the website
-- []  My future goal for this project would be to have a product page for each product that could be clicked into
+- [ ]  My future goal for this project would be to have a product page for each product that could be clicked into
 
 
 ## Protection 
