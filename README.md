@@ -54,9 +54,9 @@ Desktop shopping cart open view:
 
 ## Goals
 
-- [x] My first goal for this project was to create a list of projects that could be added to a shopping cart modal
-- [x] Next, I wanted to create about and contact pages for the website
-- [ ] My future goal for this project would be to have a product page for each product that could be clicked into
+:heavy_check_mark: My first goal for this project was to create a list of projects that could be added to a shopping cart modal
+:heavy_check_mark: Next, I wanted to create about and contact pages for the website
+:white_check_mark: My future goal for this project would be to have a product page for each product that could be clicked into
 
 
 ## Protection 
