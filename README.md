@@ -16,8 +16,28 @@ This is a front end project using:
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
+## Project Objectives
 
-## About this project 
+With this project, I wanted to practice my front end skills. Specifically, I wanted to practice:
+
+### Designing 
+- To create an inviting website with a colour scheme that reflects the nature element of a farm shop. 
+
+### Local Storage with JavaScript
+- To ensure that the shopping cart items persist in the shopping cart, even if the page is refreshed or the tab is closed and then reopened
+
+### Responsiveness
+- To create a fully responsive website that is adaptable to mobile, ipad and desktop
+
+## Design
+
+The colour scheme for this website: 
+![camouflage green colour](https://readme-swatches.vercel.app/#67755D)
+![irish clover colour](https://readme-swatches.vercel.app/#97A88B)
+![beige colour](https://readme-swatches.vercel.app/#FEFAE6)
+![orange brown colour](https://readme-swatches.vercel.app/#EA9944)
+
+
 
 This is a shopping cart web app for a mock local farm shop :tomato:
 
@@ -39,9 +59,6 @@ This app protects from:
 - It is not possible to put a minus number as a quantity
 - The code for the input buttons is not done using innerHTML, protecting from cross site scripting
 
-## Responsiveness
-
-This is a fully responsive web app adaptable to mobile, ipad and desktop. 
 
 ### Mobile: 
 
