@@ -29,22 +29,7 @@ With this project, I wanted to practice my front end skills. Specifically, I wan
 ### Responsiveness
 - To create a fully responsive website that is adaptable to mobile, ipad and desktop
 
-## Design
-
-The colour scheme for this website: 
-
-![blue](https://readme-swatches.vercel.app/#67755D
-<img valign='middle' src='https://readme-swatches.vercel.app/#97A88B?style=round' alt='clover green'/>
-<img valign='middle' src='https://readme-swatches.vercel.app/#67755D?style=round' alt='beige'/> 
-<img valign='middle' src='https://readme-swatches.vercel.app/#EA9944?style=round' alt='orange'/> 
-
-
-
-This is a shopping cart web app for a mock local farm shop :tomato:
-
-It uses **local storage** which means that items added to the cart will stay in the cart even when: 
-- the page is refreshed
-- the tab is closed and another tab is opened
+## Features 
 
 This app allows you to:
 
@@ -55,11 +40,10 @@ This app allows you to:
 - View the total price of all items in the cart
 - Displays a message when the cart is empty
 
-This app protects from: 
+## Protection 
 - The item quantity being edited in any other way than through the increase and decrease buttons
 - It is not possible to put a minus number as a quantity
 - The code for the input buttons is not done using innerHTML, protecting from cross site scripting
-
 
 ### Mobile: 
 
@@ -67,15 +51,13 @@ Item being added to the cart in mobile view:
 
 ![radishes being added to the cart - mobile view ](https://github.com/user-attachments/assets/ce36db74-08e5-4ad2-b8a7-94b7b57b290b)
 
-
 ### Desktop 
 
 Desktop shopping cart open view: 
 
 ![trolley modal open - desktop view](https://github.com/user-attachments/assets/af5bb155-7e9d-4704-908e-04fb395ac980)
 
-
 ## Final Words 
 
-- Author: Gabriel Rowan  :smiley_cat:
+- Author: Gabriel Rowan 
 - Project finished December 2024
