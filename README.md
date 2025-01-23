@@ -69,4 +69,4 @@ Desktop shopping cart open view:
 ## Final Words 
 
 - Author: Gabriel Rowan 
-- Project finished December 2024
+
