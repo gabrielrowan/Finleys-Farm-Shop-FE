@@ -33,7 +33,7 @@ With this project, I wanted to practice my front end skills. Specifically, I wan
 
 The colour scheme for this website: 
 
-<a href='#'><img valign='middle' src='https://readme-swatches.vercel.app/E0AAFF?style=round'/>
+<img valign='middle' src='https://readme-swatches.vercel.app/E0AAFF?style=round'/>
 
 
 This is a shopping cart web app for a mock local farm shop :tomato:
