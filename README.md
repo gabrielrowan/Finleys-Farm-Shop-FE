@@ -52,6 +52,13 @@ Desktop shopping cart open view:
 
 ![trolley modal open - desktop view](https://github.com/user-attachments/assets/af5bb155-7e9d-4704-908e-04fb395ac980)
 
+## Goals 
+
+My first goal for this project was to create a list of projects that could be added to a shopping cart modal. 
+Next, I wanted to create about and contact pages for the website. 
+
+My future goal for this project would be to have a product page for each product that could be clicked into. 
+
 ## Protection 
 - The item quantity being edited in any other way than through the increase and decrease buttons
 - It is not possible to put a minus number as a quantity
