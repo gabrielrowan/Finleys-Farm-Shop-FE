@@ -32,6 +32,7 @@ With this project, I wanted to practice my front end skills. Specifically, I wan
 ## Design
 
 The colour scheme for this website: 
+<img valign='middle' alt='camouflage green colour' src='https://readme-swatches.vercel.app/#67755D'/>
 ![camouflage green colour](https://readme-swatches.vercel.app/#67755D)
 ![irish clover colour](https://readme-swatches.vercel.app/#97A88B)
 ![beige colour](https://readme-swatches.vercel.app/#FEFAE6)
