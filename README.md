@@ -54,13 +54,12 @@ Desktop shopping cart open view:
 
 ## Goals
 
-:heavy_check_mark: My first goal for this project was to create a list of projects that could be added to a shopping cart modal
-:heavy_check_mark: Next, I wanted to create about and contact pages for the website
-:white_check_mark: My future goal for this project would be to have a product page for each product that could be clicked into
+- [x] My first goal for this project was to create a list of projects that could be added to a shopping cart modal
+- [x] Next, I wanted to create about and contact pages for the website
+- []  My future goal for this project would be to have a product page for each product that could be clicked into
 
 
 ## Protection 
-
 
 - The item quantity being edited in any other way than through the increase and decrease buttons
 - It is not possible to put a minus number as a quantity
