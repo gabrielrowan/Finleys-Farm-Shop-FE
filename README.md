@@ -40,11 +40,6 @@ This app allows you to:
 - View the total price of all items in the cart
 - Displays a message when the cart is empty
 
-## Protection 
-- The item quantity being edited in any other way than through the increase and decrease buttons
-- It is not possible to put a minus number as a quantity
-- The code for the input buttons is not done using innerHTML, protecting from cross site scripting
-
 ### Mobile: 
 
 Item being added to the cart in mobile view:
@@ -56,6 +51,12 @@ Item being added to the cart in mobile view:
 Desktop shopping cart open view: 
 
 ![trolley modal open - desktop view](https://github.com/user-attachments/assets/af5bb155-7e9d-4704-908e-04fb395ac980)
+
+## Protection 
+- The item quantity being edited in any other way than through the increase and decrease buttons
+- It is not possible to put a minus number as a quantity
+- The code for the input buttons is not done using innerHTML, protecting from cross site scripting
+
 
 ## Final Words 
 
