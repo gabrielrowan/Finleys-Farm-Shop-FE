@@ -33,10 +33,10 @@ With this project, I wanted to practice my front end skills. Specifically, I wan
 
 The colour scheme for this website: 
 
-<img valign='middle' src='https://readme-swatches.vercel.app/#67755D?style=round' alt='camouflage green'/> Camouflage Green
-<img valign='middle' src='https://readme-swatches.vercel.app/#97A88B?style=round' alt='clover green'/> Clover Green
-<img valign='middle' src='https://readme-swatches.vercel.app/#67755D?style=round' alt='beige'/> Beige
-<img valign='middle' src='https://readme-swatches.vercel.app/#EA9944?style=round' alt='orange'/> Dark Orange 
+<img valign='middle' src='https://readme-swatches.vercel.app/#67755D?style=round' alt='camouflage green'/> 
+<img valign='middle' src='https://readme-swatches.vercel.app/#97A88B?style=round' alt='clover green'/>
+<img valign='middle' src='https://readme-swatches.vercel.app/#67755D?style=round' alt='beige'/> 
+<img valign='middle' src='https://readme-swatches.vercel.app/#EA9944?style=round' alt='orange'/> 
 
 
 
