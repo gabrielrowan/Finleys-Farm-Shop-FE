@@ -6,7 +6,8 @@ from selenium.webdriver.common.by import By
 import pytest
 import random
 
-URL = "https://gabrielrowan.github.io/Finleys-Farm-Shop-FE/products.html"
+#URL = "https://gabrielrowan.github.io/Finleys-Farm-Shop-FE/products.html"
+URL = "http://127.0.0.1:5500/products.html"
 
 @pytest.fixture()  
 def chrome_browser():  
@@ -95,3 +96,55 @@ def test_product_added_to_cart_modal(shop_page):
     cart_item_name = shop_page.find_element(By.CLASS_NAME, "cart-item-description").text
 
     assert cart_item_name == product_name
+
+
+def test_product_quantity_starts_at_1(shop_page):
+    add_buttons = shop_page.find_elements(By.CLASS_NAME, "add-to-cart")
+    product_count = len(add_buttons)
+    random_product_item = random.randint(0, product_count - 1)
+    add_buttons[random_product_item].click()
+    quantity_value = shop_page.find_element(By.CLASS_NAME, "input-cart-quantity").get_attribute('value')
+
+    assert int(quantity_value) == 1
+
+def test_quantity_plus_button_increases_quantity_by_1(shop_page):
+    # Find the first "Add to Cart" button and click it
+    add_button = WebDriverWait(shop_page, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, ".shop-item .add-to-cart"))
+    )
+    add_button.click()
+
+    # Wait for the cart control to appear (which contains the increase quantity button)
+    cart_control = WebDriverWait(shop_page, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "cart-items-control"))
+    )
+
+    increase_quantity_button = WebDriverWait(cart_control, 20).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".button-cart-quantity.increase-quantity"))
+    )
+
+    input_value = WebDriverWait(cart_control, 20).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".input-cart-quantity"))
+    )
+    
+    input_val_before = input_value.get_attribute('value')
+
+    shop_page.execute_script("arguments[0].click();", increase_quantity_button)
+
+    input_val_after = input_value.get_attribute('value')
+
+    assert (int(input_val_before) + 1) == int(input_val_after)
+
+
+
+# def test_quantity_minus_button_decreases_quantity_by_1:
+
+# def test_quantity_buttons_disappear_when_product_item_quantity_0:
+
+# def test_product_quantity_in_trolley_modal_increases_when_quantity_increases:
+
+# def test_product_quantity_in_trolley_modal_decreases_when_quantity_decreases:
+
+
+# def test_product_removed_from_trolley_modal_when_quantity_0:
+
