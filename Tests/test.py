@@ -6,8 +6,8 @@ from selenium.webdriver.common.by import By
 import pytest
 import random
 
-#URL = "https://gabrielrowan.github.io/Finleys-Farm-Shop-FE/products.html"
-URL = "http://127.0.0.1:5500/products.html"
+URL = "https://gabrielrowan.github.io/Finleys-Farm-Shop-FE/products.html"
+
 
 @pytest.fixture()  
 def chrome_browser():  
@@ -21,15 +21,6 @@ def shop_page(chrome_browser):
     chrome_browser.get(URL)
     return chrome_browser 
 
-# Ensures that cart stored in session doesn't hold any items for the beginning of testing
-def set_empty_cart(shop_page):
-    cart = shop_page.execute_script("return sessionStorage.getItem('cart');")
-    if len(cart) != 0:
-        shop_page.execute_script("sessionStorage.setItem('cart', '[]');")
-
-def get_cart(shop_page):
-    cart = shop_page.execute_script("return sessionStorage.getItem('cart');")
-    return cart 
 
 def test_title(shop_page):
     assert "Finley's Farm Shop" in shop_page.title
@@ -39,6 +30,7 @@ def test_add_button_count_matches_product_count(shop_page):
     products = shop_page.find_elements(By.CLASS_NAME, "shop-item")
     assert len(add_buttons) == len(products)
 
+# You could use is visible here instead
 def test_quantity_buttons_not_visible_on_initial_pageload(shop_page):
     quantity_buttons = shop_page.find_elements(By.CLASS_NAME, "cart-items-control")
     assert len(quantity_buttons) == 0
@@ -107,6 +99,7 @@ def test_product_quantity_starts_at_1(shop_page):
 
     assert int(quantity_value) == 1
 
+
 def test_quantity_plus_button_increases_quantity_by_1(shop_page):
     # Find the first "Add to Cart" button and click it
     add_button = WebDriverWait(shop_page, 10).until(
@@ -137,11 +130,103 @@ def test_quantity_plus_button_increases_quantity_by_1(shop_page):
 
 
 
-# def test_quantity_minus_button_decreases_quantity_by_1:
+def test_quantity_minus_button_decreases_quantity_by_1(shop_page):
+    # Find the first "Add to Cart" button and click it
+    add_button = WebDriverWait(shop_page, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, ".shop-item .add-to-cart"))
+    )
+    add_button.click()
 
-# def test_quantity_buttons_disappear_when_product_item_quantity_0:
+    # Wait for the cart control to appear (which contains the increase quantity button)
+    cart_control = WebDriverWait(shop_page, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "cart-items-control"))
+    )
 
-# def test_product_quantity_in_trolley_modal_increases_when_quantity_increases:
+    increase_quantity_button = WebDriverWait(cart_control, 20).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".button-cart-quantity.increase-quantity"))
+    )
+
+    decrease_quantity_button = WebDriverWait(cart_control, 20).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".button-cart-quantity.decrease-quantity"))
+    )
+
+    input_value = WebDriverWait(cart_control, 20).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".input-cart-quantity"))
+    )
+    
+
+    shop_page.execute_script("arguments[0].click();", increase_quantity_button)
+    shop_page.execute_script("arguments[0].click();", increase_quantity_button)
+    input_val_before = input_value.get_attribute('value')
+
+
+    shop_page.execute_script("arguments[0].click();", decrease_quantity_button)
+
+    input_val_after = input_value.get_attribute('value')
+
+    assert (int(input_val_before) - 1) == int(input_val_after)
+
+def test_quantity_buttons_disappear_when_product_item_quantity_0(shop_page):
+     # Find the first "Add to Cart" button and click it
+    add_button = WebDriverWait(shop_page, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, ".shop-item .add-to-cart"))
+    )
+    add_button.click()
+
+    # Wait for the cart control to appear (which contains the increase quantity button)
+    cart_control = WebDriverWait(shop_page, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "cart-items-control"))
+    )
+
+    increase_quantity_button = WebDriverWait(cart_control, 20).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".button-cart-quantity.increase-quantity"))
+    )
+
+    decrease_quantity_button = WebDriverWait(cart_control, 20).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".button-cart-quantity.decrease-quantity"))
+    )
+
+    shop_page.execute_script("arguments[0].click();", increase_quantity_button)
+
+    shop_page.execute_script("arguments[0].click();", decrease_quantity_button)
+
+    assert add_button.is_displayed == True
+
+def test_product_quantity_in_trolley_modal_increases_when_quantity_increases(shop_page):
+    add_button = WebDriverWait(shop_page, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, ".shop-item .add-to-cart"))
+    )
+    add_button.click()
+
+    # Wait for the cart control to appear (which contains the increase quantity button)
+    cart_control = WebDriverWait(shop_page, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "cart-items-control"))
+    )
+
+    increase_quantity_button = WebDriverWait(cart_control, 20).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".button-cart-quantity.increase-quantity"))
+    )
+
+    decrease_quantity_button = WebDriverWait(cart_control, 20).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".button-cart-quantity.decrease-quantity"))
+    )
+
+    shop_page.execute_script("arguments[0].click();", increase_quantity_button)
+
+    shop_item_quantity = WebDriverWait(cart_control, 20).until(
+    EC.presence_of_element_located((By.CLASS_NAME, "input-cart-quantity"))
+)
+
+    cart_modal = WebDriverWait(cart_control, 20).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "cart-modal-content"))
+    )
+    
+    modal_quantity = cart_modal.find_element((By.CLASS_NAME, "input-cart-quantity"))
+
+    assert shop_item_quantity == modal_quantity
+
+
+
 
 # def test_product_quantity_in_trolley_modal_decreases_when_quantity_decreases:
 
