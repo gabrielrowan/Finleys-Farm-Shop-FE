@@ -62,6 +62,15 @@ def compare_trolley_count_difference(shop_page, product_item_count):
     cart_count_after = shop_page.find_element(By.CLASS_NAME, "cart-count").text
     return cart_count_before,cart_count_after
 
+def remove_first_modal_cart_item(shop_page):
+    modal_cart_items = shop_page.find_element(By.CLASS_NAME, "cart-item-list")
+    remove_button = modal_cart_items.find_elements(By.CLASS_NAME, "decrease-quantity")[0]
+    remove_button.click()
+
+def get_cart_item_price(item):
+    str_price = item.find_element(By.CLASS_NAME, "cart-item-price").text
+    flt_price = float(str_price.replace("£", ""))
+    return flt_price
 
 # Helper classes end 
 
@@ -164,4 +173,31 @@ def test_product_quantity_starts_at_1(shop_page):
     click_random_product_item(shop_page)
     quantity_value = shop_page.find_element(By.CLASS_NAME, "input-cart-quantity").get_attribute('value')
     assert int(quantity_value) == 1
+
+# Removing products
+def test_subtotal_0_when_only_product_removed_in_modal(shop_page):
+    click_random_product_item(shop_page)
+    open_cart_trolley_modal(shop_page)
+    remove_first_modal_cart_item(shop_page)
+    cart_subtotal = get_cart_subtotal(shop_page)
+    assert int(cart_subtotal) == 0
+
+
+def test_subtotal_decreases_when_product_removed_in_modal(shop_page):
+    # add 2 products
+    for i in range(0, 2):
+        click_random_product_item(shop_page)
+    open_cart_trolley_modal(shop_page)
+    # get subtotal before removing a product
+    cart_subtotal_before = get_cart_subtotal(shop_page)
+    modal_cart_items = shop_page.find_element(By.CLASS_NAME, "cart-item-list")
+    cart_items = modal_cart_items.find_elements(By.CLASS_NAME, "cart-item")
+    # get the prices of all items in the cart
+    prices = []
+    for item in cart_items:
+        flt_price = get_cart_item_price(item)
+        prices.append(flt_price)
+    remove_first_modal_cart_item(shop_page)
+    cart_subtotal_after = get_cart_subtotal(shop_page)
+    assert cart_subtotal_after == pytest.approx(cart_subtotal_before - prices[0])
 
