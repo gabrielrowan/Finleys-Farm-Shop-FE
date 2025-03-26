@@ -250,8 +250,7 @@ def test_subtotal_does_not_reset_when_page_refreshed(shop_page):
 
 def test_cart_item_total_does_not_reset_when_page_refreshed(shop_page):
 
-    for i in range(2):
-        click_random_product_item(shop_page)
+    open_cart_trolley_modal(shop_page)
     cart_count_pre_refresh = get_cart_item_count(shop_page)
     shop_page.refresh()
     cart_count_post_refresh = get_cart_item_count(shop_page)
