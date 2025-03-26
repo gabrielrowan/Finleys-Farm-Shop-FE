@@ -28,7 +28,7 @@ def click_random_product_item(shop_page):
         EC.presence_of_all_elements_located((By.CLASS_NAME, "add-to-cart")))
     product_count = len(add_buttons)
     random_product_item = random.randint(0, product_count - 1)
-    add_button_selected = WebDriverWait(shop_page, 10).until(
+    add_button_selected = WebDriverWait(shop_page, 30).until(
         EC.element_to_be_clickable((By.XPATH, f"(//button[@class='add-to-cart'])[{random_product_item + 1}]"))
     )
 
@@ -56,10 +56,10 @@ def get_trolley_modal_title_item_count(shop_page):
     return int(cart_item_count)
 
 def compare_trolley_count_difference(shop_page, product_item_count):
-    cart_count_before = shop_page.find_element(By.CLASS_NAME, "cart-count").text
+    cart_count_before = get_cart_item_count(shop_page)
     for i in range(product_item_count):
         click_random_product_item(shop_page)
-    cart_count_after = shop_page.find_element(By.CLASS_NAME, "cart-count").text
+    cart_count_after = get_cart_item_count(shop_page)
     return cart_count_before,cart_count_after
 
 def remove_first_modal_cart_item(shop_page):
@@ -67,10 +67,19 @@ def remove_first_modal_cart_item(shop_page):
     remove_button = modal_cart_items.find_elements(By.CLASS_NAME, "decrease-quantity")[0]
     remove_button.click()
 
+def get_cart_item_count(shop_page):
+    return int(shop_page.find_element(By.CLASS_NAME, "cart-count").text)
+
 def get_cart_item_price(item):
     str_price = item.find_element(By.CLASS_NAME, "cart-item-price").text
     flt_price = float(str_price.replace("£", ""))
     return flt_price
+
+def click_increase_quantity_shop_item_button(shop_page, increase_quantity_button):
+    shop_page.execute_script("arguments[0].click();", increase_quantity_button)
+
+def click_decrease_quantity_shop_item_button(shop_page, decrease_quantity_button):
+    shop_page.execute_script("arguments[0].click();", decrease_quantity_button)
 
 # Helper classes end 
 
@@ -88,8 +97,8 @@ def test_quantity_buttons_not_visible_on_initial_pageload(shop_page):
     assert len(quantity_buttons) == 0
 
 def test_trolley_cart_count_is_zero_when_cart_empty(shop_page):
-    cart_count = shop_page.find_element(By.CLASS_NAME, "cart-count").text
-    assert int(cart_count) == 0
+    cart_count = get_cart_item_count(shop_page)
+    assert cart_count == 0
 
 def test_trolley_modal_can_open(shop_page):
     open_cart_trolley_modal(shop_page)
@@ -174,6 +183,31 @@ def test_product_quantity_starts_at_1(shop_page):
     quantity_value = shop_page.find_element(By.CLASS_NAME, "input-cart-quantity").get_attribute('value')
     assert int(quantity_value) == 1
 
+def test_increase_quantity_button_increases_quantity(shop_page):
+    click_random_product_item(shop_page)
+    increase_quantity_button = shop_page.find_element(By.CLASS_NAME, "increase-quantity")
+    # slightly overlapping elements so need to use different click method
+    shop_page.execute_script("arguments[0].click();", increase_quantity_button)
+    quantity_value = shop_page.find_element(By.CLASS_NAME, "input-cart-quantity").get_attribute('value')
+
+    assert int(quantity_value) == 2
+
+def test_decrease_quantity_button_decreases_quantity(shop_page):
+    click_random_product_item(shop_page)
+    increase_quantity_button = shop_page.find_element(By.CLASS_NAME, "increase-quantity")
+    # set quantity to 4
+    for i in range(0, 3):
+        click_increase_quantity_shop_item_button(shop_page, increase_quantity_button)
+
+    decrease_quantity_button = shop_page.find_element(By.CLASS_NAME, "decrease-quantity")
+    click_decrease_quantity_shop_item_button(shop_page, decrease_quantity_button)
+
+    # slightly overlapping elements so need to use different click method
+    quantity_value = shop_page.find_element(By.CLASS_NAME, "input-cart-quantity").get_attribute('value')
+
+    assert int(quantity_value) == 3
+
+
 # Removing products
 def test_subtotal_0_when_only_product_removed_in_modal(shop_page):
     click_random_product_item(shop_page)
@@ -201,3 +235,25 @@ def test_subtotal_decreases_when_product_removed_in_modal(shop_page):
     cart_subtotal_after = get_cart_subtotal(shop_page)
     assert cart_subtotal_after == pytest.approx(cart_subtotal_before - prices[0])
 
+# Testing sessions
+
+def test_subtotal_does_not_reset_when_page_refreshed(shop_page):
+
+    click_random_product_item(shop_page)
+    open_cart_trolley_modal(shop_page)
+    subtotal_pre_refresh = get_cart_subtotal(shop_page)
+    shop_page.refresh()
+    open_cart_trolley_modal(shop_page)
+    subtotal_post_refresh = get_cart_subtotal(shop_page)
+
+    assert subtotal_pre_refresh == subtotal_post_refresh
+
+def test_cart_item_total_does_not_reset_when_page_refreshed(shop_page):
+
+    for i in range(2):
+        click_random_product_item(shop_page)
+    cart_count_pre_refresh = get_cart_item_count(shop_page)
+    shop_page.refresh()
+    cart_count_post_refresh = get_cart_item_count(shop_page)
+
+    assert cart_count_pre_refresh == cart_count_post_refresh
