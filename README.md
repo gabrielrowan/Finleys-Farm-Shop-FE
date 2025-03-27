@@ -29,7 +29,7 @@ Testing for the project uses:
 - Fully responsive, adapting to desktop, iPad, and mobile screens
 - Allows users to add and remove products, update quantities, and view the total price
 - Designed with warm, earthy tones to reflect the farm shop theme
-- Tested using Selenium WebDriver with Pytest to automate user interactions
+- Tested using Selenium WebDriver with Pytest to simulate user interactions with the website
 
 ## Testing
 
