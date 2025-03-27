@@ -16,29 +16,32 @@ This is a front end project using:
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
-## Project Objectives
+Testing for the project uses:
 
-With this project, I wanted to practice my front end skills. Specifically, I wanted to practice:
+![Selenium](https://img.shields.io/badge/-selenium-%43B02A?style=for-the-badge&logo=selenium&logoColor=white)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Pytest](https://img.shields.io/badge/pytest-%23ffffff.svg?style=for-the-badge&logo=pytest&logoColor=2f9fe3)
 
-### Designing 
-- To create an inviting website with a colour scheme that reflects the nature element of a farm shop. 
 
-### Local Storage with JavaScript
-- To ensure that the shopping cart items persist in the shopping cart, even if the page is refreshed or the tab is closed and then reopened
+## Overview
 
-### Responsiveness
-- To create a fully responsive website that is adaptable to mobile, ipad and desktop
+This is a fully responsive front-end shopping cart application for a farm shop using HTML, CSS and JavaScript that adapts to desktop, ipad and mobile screen sizes. 
+Funtionality wise, it's main focus is being able to add and remove products to the shopping cart, update their quantities and view the price total.
+I also wanted to create a design with warm, welcoming colours and fonts, using into earthy tones to reflect the the farm shop theme.
 
-## Features 
+It's tested using Selenium Web Driver with Pytest, leveraging automation testing to simulate the user interaction with the products webpage.
 
-This app allows you to:
+## Testing
 
-- Add items to the cart
-- Increase and decrease the quantity of each item selected
-- View all items added to the cart
-- View the total number of items in the cart
-- View the total price of all items in the cart
-- Displays a message when the cart is empty
+The testing for this project focuses on the products webpage. Here is a (non-exhaustive) list of what the tests cover:
+- Checking that the default values on initial page load are as expected, such as the cart being empty
+- That adding a product updates the total
+- That removing a product updates the total
+- That the increase quantity button increases the quantity of product
+- That the decrease quantity button decreases the quantity of a product
+- That it is possible to refresh the page and have the items remain in the cart, instead of being reset to 0
+
+The tests can be viewed in the `/Tests` folder
 
 ### Mobile: 
 
@@ -52,21 +55,5 @@ Desktop shopping cart open view:
 
 ![trolley modal open - desktop view](https://github.com/user-attachments/assets/af5bb155-7e9d-4704-908e-04fb395ac980)
 
-## Goals
 
-- [x] My first goal for this project was to create a list of projects that could be added to a shopping cart modal
-- [x] Next, I wanted to create about and contact pages for the website
-- [ ]  My future goal for this project would be to have a product page for each product that could be clicked into
-
-
-## Protection 
-
-- The item quantity being edited in any other way than through the increase and decrease buttons
-- It is not possible to put a minus number as a quantity
-- The code for the input buttons is not done using innerHTML, protecting from cross site scripting
-
-
-## Final Words 
-
-- Author: Gabriel Rowan 
 
