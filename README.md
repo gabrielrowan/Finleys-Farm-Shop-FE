@@ -33,7 +33,7 @@ Testing for the project uses:
 
 ## Testing
 
-The testing for this project focuses on the products webpage. Here is a (non-exhaustive) list of what the tests cover:
+The testing for this project focuses on the products webpage. Here is a sample of what the tests cover:
 - Checking that the default values on initial page load are as expected, such as the cart being empty
 - That adding a product updates the total
 - That removing a product updates the total
