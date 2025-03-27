@@ -43,6 +43,8 @@ The testing for this project focuses on the products webpage. Here is a sample o
 
 The tests can be viewed in the `/Tests` folder
 
+## Mobile/ Desktop View Screenshots
+
 ## Mobile: 
 
 Item being added to the cart in mobile view:
