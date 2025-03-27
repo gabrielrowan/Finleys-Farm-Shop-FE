@@ -43,13 +43,13 @@ The testing for this project focuses on the products webpage. Here is a (non-exh
 
 The tests can be viewed in the `/Tests` folder
 
-### Mobile: 
+## Mobile: 
 
 Item being added to the cart in mobile view:
 
 ![radishes being added to the cart - mobile view ](https://github.com/user-attachments/assets/ce36db74-08e5-4ad2-b8a7-94b7b57b290b)
 
-### Desktop 
+## Desktop 
 
 Desktop shopping cart open view: 
 
