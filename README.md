@@ -25,11 +25,11 @@ Testing for the project uses:
 
 ## Overview
 
-This is a fully responsive front-end shopping cart application for a farm shop using HTML, CSS and JavaScript that adapts to desktop, ipad and mobile screen sizes. 
-Funtionality wise, it's main focus is being able to add and remove products to the shopping cart, update their quantities and view the price total.
-I also wanted to create a design with warm, welcoming colours and fonts, using into earthy tones to reflect the the farm shop theme.
-
-It's tested using Selenium Web Driver with Pytest, leveraging automation testing to simulate the user interaction with the products webpage.
+- Fully responsive front-end shopping cart application for a farm shop
+- Built with HTML, CSS, and JavaScript, adapting to desktop, iPad, and mobile screens
+- Allows users to add and remove products, update quantities, and view the total price
+- Designed with warm, earthy tones to reflect the farm shop theme
+- Tested using Selenium WebDriver with Pytest to automate user interactions
 
 ## Testing
 
